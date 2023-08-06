@@ -1,9 +1,9 @@
 {
-  "hosting": [
-    {
-      "target": "slackclone",
-      "source": ".",
-      "frameworksBackend": {}
-    }
-  ]
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
 }

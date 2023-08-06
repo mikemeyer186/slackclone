@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "slackclone-a5cb0": {
-      "hosting": {
-        "slackclone": [
-          "slackclone-a5cb0"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "slackclone-a5cb0"
+    "default": "slackclone-e900c"
   }
 }
