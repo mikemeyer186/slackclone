@@ -1,0 +1,83 @@
+@import "../../../styles/main.scss";
+
+.menu {
+    position: relative;
+    background-color: $grey;
+    border-bottom: $normalBorder;
+    color: $textgrey;
+    height: calc($menuHeight - 1px);
+    z-index: 2;
+}
+
+.displayName {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.logo {
+    width: 200px;
+}
+
+input[type=text],
+select {
+    width: 500px;
+    color: $darkgrey;
+    padding: 4px 4px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid $silvergrey;
+    border-radius: 4px;
+    background-color: $white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 32px;
+    width: 32px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menu-mat-icon {
+    display: flex;
+    align-items: center;
+}
+
+.menu-mat-button {
+    padding: 0 3px 0 0;
+    justify-content: flex-end;
+}
+
+@media (max-width: $menuBreakpoint) {
+
+    input[type=text],select {
+        width: 60%;
+    }
+
+    .menu-icon {
+        display: flex;
+    }
+}
+
+@media (max-width: $breakpointCompact) {
+    .menu-display-name {
+        display: none;
+    }
+
+    .menu-mat-icon {
+        display: none !important;
+    }
+
+    .menu-icon {
+        width: 64px;
+    }
+}
+
+.profile-image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100%;
+  }

@@ -1,0 +1,75 @@
+<div *ngIf="this.chatService.chatReady" class="chat-container">
+    <div *ngFor="let partner of this.chatService.activeChatPartnerList" class="chat-partner">
+        <div>
+            <img src="{{ partner.image }}"
+                (click)="this.channelService.messageDialogOpen(partner.name, partner.image, partner.email, partner.id)">
+            <span
+                (click)="this.channelService.messageDialogOpen(partner.name, partner.image, partner.email, partner.id)">{{
+                partner.name }}</span>
+        </div>
+        <div class="editor-btn" (click)="this.setEditorStatus()">
+            <button mat-mini-fab color="#ffffff">
+                <mat-icon *ngIf="!this.showEditor">keyboard</mat-icon>
+                <mat-icon *ngIf="this.showEditor">keyboard_hide</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div id="chat-content" class="chat-content" [class.no-editor-padding]="!this.showEditor">
+
+        <div *ngFor="let partner of this.chatService.activeChatPartnerList" class="chat-top">
+            <img src="{{ partner.image }}"
+                (click)="this.channelService.messageDialogOpen(partner.name, partner.image, partner.email, partner.id)">
+            <span
+                (click)="this.channelService.messageDialogOpen(partner.name, partner.image, partner.email, partner.id)">{{
+                partner.name }}</span>
+            <div class="chat-subtext">This conversation exists only between <span class="chat-partner-blue"
+                    (click)="this.channelService.messageDialogOpen(partner.name, partner.image, partner.email, partner.id)">@{{
+                    partner.name }}</span> and you. Check the profil of this person to see more information.
+            </div>
+        </div>
+
+        <div *ngFor="let date of this.chatService.dateList" class="chat-date-spacer">
+            <div class="chat-date">{{ date | date: 'dd.MM.yyyy' }}</div>
+
+            <ng-container *ngFor="let message of this.chatService.chatHistory">
+
+                <div *ngIf="message.date == date" class="message">
+
+                    <div class="">
+                        <img class="message-image" src="{{ message.user.image }}"
+                            (click)="this.channelService.messageDialogOpen(message.user.name, message.user.image, message.user.email, message.user.id)">
+                    </div>
+                    <div class="message-main">
+                        <div class="message-main-top">
+                            <div class="message-user"
+                                (click)="this.channelService.messageDialogOpen(message.user.name, message.user.image, message.user.email, message.user.id)">
+                                {{ message.user.name }}</div>
+                            <div class="message-time">{{ message.time }}</div>
+                        </div>
+                        <div class="message-content">
+                            <div [innerHTML]="message.message"></div>
+                            <div *ngIf="message.images.length > 0">
+                                <div class="message-attachment">
+                                    <img *ngFor="let image of message.images"
+                                        (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                        class="image-attachment">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <div class="text-editor" *ngIf="this.showEditor">
+        <app-commentfield [parentName]="'chat'"></app-commentfield>
+    </div>
+
+</div>

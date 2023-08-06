@@ -1,0 +1,92 @@
+<div *ngIf="this.channelService.channelReady" class="channel-container">
+    <div class="channelTitle">
+        <div>
+            <mat-icon>numbers</mat-icon>
+            <span (click)="this.channelService.channelDialogOpen()">{{
+                this.channelService.activeChannel.title }}</span>
+        </div>
+        <div class="editor-btn" (click)="this.setEditorStatus()">
+            <button mat-mini-fab color="#ffffff">
+                <mat-icon *ngIf="!this.showEditor">keyboard</mat-icon>
+                <mat-icon *ngIf="this.showEditor">keyboard_hide</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div id="channel-content" class="channel-content" [class.no-editor-padding]="!this.showEditor">
+
+        <div class="channel-top">
+            <div class="channel-top-header">
+                <mat-icon>numbers</mat-icon>
+                <h1>{{ this.channelService.activeChannel.title }}</h1>
+            </div>
+            <div>This channel was created by <span class="channel-creator"
+                    (click)="this.channelService.messageDialogOpen(this.channelService.activeChannel.creator.name, this.channelService.activeChannel.creator.image, this.channelService.activeChannel.creator.email, this.channelService.activeChannel.creator.id)">@{{
+                    this.channelService.activeChannel.creator.name
+                    }}</span> on {{ this.channelService.activeChannel.creationDate.toLocaleString() }}.
+                This is the beginning of the channel.</div>
+        </div>
+
+        <div *ngFor="let date of this.channelService.dateList" class="channel-date-spacer">
+            <div class="channel-date">{{ date | date: 'dd.MM.yyyy' }}</div>
+
+            <ng-container *ngFor="let thread of this.channelService.channelThreads">
+
+                <div *ngIf="thread.date.split('T')[0] == date" class="posting">
+
+                    <div>
+                        <img (click)="this.channelService.messageDialogOpen(thread.user.name, thread.user.image, thread.user.email, thread.user.id)"
+                            class="posting-image" src="{{ thread.user.image }}">
+                    </div>
+                    <div class="posting-main">
+                        <div class="posting-menu" (click)="this.channelService.openThread(thread)"
+                            matTooltip="Reply on thread">
+                            <mat-icon fontIcon="reply_all"></mat-icon>
+                        </div>
+                        <div class="posting-main-top">
+                            <div class="posting-user"
+                                (click)="this.channelService.messageDialogOpen(thread.user.name, thread.user.image, thread.user.email, thread.user.id)">
+                                {{
+                                thread.user.name }}</div>
+                            <div class="posting-time">{{ thread.time }}</div>
+                        </div>
+                        <div class="posting-content">
+                            <div [innerHTML]="thread.content"></div>
+                            <div *ngIf="thread.images.length > 0">
+                                <div class="posting-attachment">
+                                    <img *ngFor="let image of thread.images"
+                                        (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                        class="image-attachment">
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="thread.replies.length > 0">
+                            <div class="posting-threads" (click)="this.channelService.openThread(thread)">
+                                <div class="posting-thread-preview" *ngFor="let preview of thread.replies | unique">
+                                    <img src="{{ preview.user.image }}">
+                                </div>
+                                <span *ngIf="thread.replies.length == 1" class="posting-thread-reply">{{
+                                    thread.replies.length }} reply</span>
+                                <span *ngIf="thread.replies.length > 1" class="posting-thread-reply">{{
+                                    thread.replies.length }} replies</span>
+                                <span class="posting-thread-last">Last reply on {{
+                                    thread.replies[thread.replies.length -1].date | date:
+                                    'dd.MM.yyyy' }}</span>
+                                <mat-icon class="posting-thread-navigate" fontIcon="navigate_next"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <div class="text-editor" *ngIf="this.showEditor">
+        <app-commentfield [parentName]="'channel'"></app-commentfield>
+    </div>
+
+</div>

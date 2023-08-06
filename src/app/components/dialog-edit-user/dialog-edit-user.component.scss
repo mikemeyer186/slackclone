@@ -1,0 +1,176 @@
+@import "../../../styles/main.scss";
+
+
+.title{
+  font-size: 45px;
+}
+.profile-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.dialog-container {
+  color: $white;
+  width: clamp(200px, 1200px, 100%);
+  position: relative;
+
+  @media (max-width: $breakpointCompact) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .dialog-top{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .length20{
+    width:240px
+  }
+  .field-name {
+    color: rgba($textgrey, 0.5);
+    @media (max-width: $breakpointCompact) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .field-value {
+    line-height: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    @media (max-width: $breakpointCompact) {
+      justify-content: center;
+    }
+  }
+
+  .field-value-form {
+    line-height: 16px;
+    background-color: tan;
+  }
+
+
+  .table-grid {
+    display: grid;
+    gap: 1rem;
+    align-content: flex-start;
+    grid-auto-columns: 1fr;
+    grid-template-areas:
+      "one two"
+      "three seven"
+      "four eight"
+      "five nine"
+      "six ten"
+      "six ten";
+    grid-auto-flow: row;
+    @media (max-width: $breakpointCompact) {
+      grid-template-areas:
+        "one"
+        "two"
+        "three"
+        "four"
+        "five"
+        "six"
+        "seven"
+        "eight"
+        "nine"
+        "ten";
+    }
+
+    :nth-child(1) {
+      grid-area: one;
+    }
+
+    :nth-child(2) {
+      grid-area: two;
+    }
+    :nth-child(3) {
+      grid-area: three;
+    }
+    :nth-child(4) {
+      grid-area: four;
+    }
+    :nth-child(5) {
+      grid-area: five;
+    }
+    :nth-child(6) {
+      grid-area: six;
+    }
+    :nth-child(7) {
+      grid-area: seven;
+    }
+    :nth-child(8) {
+      grid-area: eight;
+    }
+    :nth-child(9) {
+      grid-area: nine;
+    }
+    :nth-child(10) {
+      grid-area: ten;
+    }
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    color: $white;
+    padding: 4px 4px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid $silvergrey;
+    border-radius: 4px;
+    background-color: $darkgrey;
+    box-sizing: border-box;
+  }
+
+  .dialog-main {
+    background-color: $grey;
+    font-size: $regular;
+    width: inherit;
+
+    @media (max-width: $breakpointCompact) {
+      font-size: $small;
+      text-align: center;
+    }
+  
+    .dialog-main-box {
+      border: 1px solid rgba($textgrey, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+
+      h4 {
+        color: #d1d2d3;
+        margin: 0 !important;
+        padding: 20px 28px;
+      }
+
+      .dialog-description {
+        padding: 6px 28px 0;
+        color: gray;
+        font-size: 13px;
+      }
+
+      .btn-container {
+        justify-content: flex-end;
+        padding: 20px 28px;
+
+        .btn {
+          padding: 12px;
+          background-color: #3f51b5;
+          color: white;
+
+          &:disabled {
+            background-color: #35373b;
+          }
+        }
+      }
+    }
+  }
+}

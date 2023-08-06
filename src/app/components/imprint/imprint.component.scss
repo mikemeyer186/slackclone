@@ -1,0 +1,64 @@
+@import "../../../styles/main.scss";
+
+.imprint-container {
+  padding: 48px;
+  color: $textgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  height: 100vh;
+
+  @media (max-width: $breakpointExpanded) {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+  @media (max-height: 640px) {
+    justify-content: flex-start;
+  }
+
+  .logo {
+    animation: slideInFromLeft 0.5s ease-in-out;
+    @media (max-width: $breakpointExpanded) {
+      width: 60%;
+      object-fit: cover;
+    }
+    @media (max-width: $breakpointMedium) {
+      width: 80%;
+    }
+    @media (max-width: $breakpointCompact) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $breakpointExpanded) {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.close-icon {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  transition: all 125ms ease-in-out;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+a {
+  color: $blue;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

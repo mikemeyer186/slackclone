@@ -1,0 +1,74 @@
+<div class="container">
+
+    <div class="title-channel-and-close-container">
+        <div class="title-and-channel">
+            <div class="title">Thread</div>
+            <div class="channel"># {{ this.channelService.activeThread.channel }}</div>
+        </div>
+        <div class="close" (click)="closeThread()"><img src="assets/img/threads/close.png"></div>
+    </div>
+
+    <div class="threads-container">
+
+        <div class="post">
+            <div class="user-message">
+                <img (click)="getUserInformation()" [src]="this.channelService.imageSource">
+                <div class="user-name-and-message">
+                    <div class="user-name-and-time">
+                        <div class="user-name" (click)="getUserInformation()">
+                            {{ this.channelService.name }}</div>
+                        <div class="time">{{ this.channelService.activeThread.date | dateAgo }}</div>
+                    </div>
+                    <div>
+                        <div class="content-thread-container" [innerHTML]="this.channelService.activeThread.content" #contentContainer></div>
+                        <div *ngIf="this.channelService.activeThread.images.length > 0">
+                            <div class="posting-attachment">
+                                <img *ngFor="let image of this.channelService.activeThread.images"
+                                    (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                    class="image-attachment">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="this.channelService.show" class="amount-comments">
+                <div>{{ this.channelService.amountReplies }}</div>
+                <div *ngIf="this.channelService.single" class="comment-container">
+                    <div>Answer</div>
+                    <div class="comment-line"></div>
+                </div>
+                <div *ngIf="this.channelService.plural" class="comment-container">
+                    <div>Answers</div>
+                    <div class="comment-line"></div>
+                </div>
+            </div>
+
+            <div *ngFor="let reply of channelService.activeThread.replies" class="user-message-more">
+                <img (click)="getUserInformationFromReplies(this.reply.user)"
+                    src="{{this.reply.user['image'] || 'assets/img/user/profile-picture.png' }}">
+                <div class="user-name-and-message">
+                    <div class="user-name-and-time">
+                        <div class="user-name" img (click)="getUserInformationFromReplies(this.reply.user)">{{
+                            this.reply.user['name'] }}</div>
+                        <div class="time">{{ this.reply.date | dateAgo }}</div>
+                    </div>
+                    <div class="img-message">
+                        <div [innerHTML]="this.reply.message"></div>
+                        <div *ngIf="this.reply.images.length > 0">
+                            <div class="posting-attachment">
+                                <img *ngFor="let image of this.reply.images"
+                                    (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                    class="image-attachment">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-text-editor">
+                <app-commentfield [parentName]="'thread'"></app-commentfield>
+            </div>
+        </div>
+    </div>
+
+</div>

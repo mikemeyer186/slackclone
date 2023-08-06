@@ -1,0 +1,151 @@
+@import "../../../styles/main.scss";
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: $darkgrey;
+}
+
+.threads-container {
+    position: absolute;
+    max-height: calc(100% - $componentHeaderHeight);
+    top: $componentHeaderHeight;
+    left: 0;
+    right: 0;
+    background-color: $darkgrey;
+    padding-bottom: 36px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.title-and-channel {
+    display: flex;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    height: $componentHeaderHeight;
+    z-index: 1;
+}
+
+.post {
+    margin-top: 24px;
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: $threadgray;
+    border-radius: 10px;
+    padding: 36px;
+}
+
+.title {
+    color: $white;
+    font-size: $fonttitle;
+}
+
+.channel {
+    color: $white;
+    margin-left: 16px;
+    font-size: $fonttitle;
+    margin-top: 48px;
+    margin-bottom: 24px;
+}
+
+
+.user-message {
+    display: flex;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 12px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        object-fit: cover;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.user-name-and-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    margin-bottom: 24px;
+    font-size: $regular
+}
+
+.user-name {
+    font-weight: 800;
+    margin-right: 10px;
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.user-name-and-time {
+    display: flex;
+}
+
+.time {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: $grey;
+}
+
+.comments {
+    width: 100%;
+    height: 0;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    margin-left: 16px;
+}
+
+.comments-container {
+    display: flex;
+    align-items: center;
+}
+
+.user-message-more {
+    display: flex;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 16px;
+    padding: 12px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.image-attachment {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.posting-attachment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

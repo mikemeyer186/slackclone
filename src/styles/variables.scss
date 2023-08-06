@@ -1,0 +1,48 @@
+// Color //
+$white: #ffffff;
+$black: #000000;
+$line: rgba(0, 0, 0, 0.5);
+$darkblue: #141d2f;
+$purple: #9747ff;
+$green: #70e61c;
+$red: #e61c40;
+$transparent: rgba(20, 29, 47, 0.8);
+$grey: #222529;
+$darkgrey: #1a1d21;
+$lightgrey: #82858d;
+$silvergrey: #97979a;
+$textgrey: #bfc0c2;
+$blue: #1d9acf;
+$threadgray: rgb(222, 222, 222);
+
+// Font //
+$fonttitle: 22px;
+$fontsubtitle: 18px;
+$regular: 16px;
+$small: 14px;
+
+// Header //
+$menuHeight: 64px;
+
+// Components //
+$componentHeaderHeight: 60px;
+
+// Sidebar //
+$sidebarWidth: 250px;
+
+// Border //
+$normalBorder: 1px solid rgba(255, 255, 255, 0.2);
+
+$paddingMainTopBottom: 37px;
+$paddingMainLeftRightMax: 100px;
+$paddingMainLeftRightMin: 25px;
+
+$spacingRegular: 15px;
+$spacingMid: 25px;
+$spacingBig: 35px;
+
+// Breakpoints //
+$breakpointExpanded: 1280px;
+$breakpointMedium: 960px;
+$menuBreakpoint: 768px;
+$breakpointCompact: 600px;

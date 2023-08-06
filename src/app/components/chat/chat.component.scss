@@ -1,0 +1,240 @@
+@import "../../../styles/main.scss";
+
+.chat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  color: $white;
+  background-color: $darkgrey;
+  transition: all 125ms ease-in-out;
+
+  .text-editor {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+    color: #000000;
+  }
+
+  .chat-partner {
+    height: $componentHeaderHeight;
+    border-bottom: 1px solid rgba($white, 0.2);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $darkgrey;
+    z-index: 1;
+
+    img {
+      width: 35px;
+      height: 35px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    span {
+      font-size: $fonttitle;
+      font-weight: 500;
+      padding: 6px 1px;
+      border-radius: 6px;
+      margin-left: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $grey;
+      }
+    }
+
+    .editor-btn {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid rgba($white, 0.1);
+      background-color: $darkgrey;
+      border-radius: 50%;
+      z-index: 1;
+
+      @media (max-height: 600px) {
+        display: flex;
+      }
+    }
+  }
+
+  .chat-content {
+    position: absolute;
+    max-height: calc(100% - $componentHeaderHeight);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 100px;
+    padding-bottom: 190px;
+    overflow-y: auto;
+  }
+
+  .no-editor-padding {
+    padding-bottom: 10px;
+  }
+
+  .chat-top {
+    padding: 48px 24px 48px 24px;
+
+    img {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    span {
+      font-size: $fontsubtitle;
+      font-weight: 500;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .chat-subtext {
+      margin-top: 16px;
+    }
+
+    .chat-partner-blue {
+      margin-left: 0;
+      color: $blue;
+      background-color: rgba($blue, 0.1);
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba($blue, 0.2);
+      }
+    }
+  }
+}
+
+.chat-date-spacer {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid rgba($white, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+
+  .chat-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 25px;
+    background-color: ($darkgrey);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: 20px;
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-weight: 300;
+    font-size: $small;
+  }
+}
+
+.message {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px;
+  transition: all 125ms ease-in-out;
+
+  &:hover {
+    background-color: $grey;
+  }
+
+  .message-image {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .message-main-top {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 3px;
+
+    .message-user {
+      font-size: $regular;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .message-time {
+      color: $silvergrey;
+      font-size: $small;
+      font-weight: 300;
+      transform: translateY(-1px);
+    }
+  }
+
+  .message-topic {
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .message-content {
+    font-size: $regular;
+    font-weight: 300;
+    color: $textgrey;
+
+    .message-attachment {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+}
+
+.image-attachment {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}

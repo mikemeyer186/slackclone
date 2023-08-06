@@ -1,0 +1,24 @@
+<div class="message-container">
+    <!-- Message Top Section -->
+    <div class="message-container-top">
+        <div class="profil-box">
+            <img class="profil-image" src="{{ this.data.image || 'assets/img/user/profile-picture.png' }}">
+            <div class="profil-name-box">
+                <span class="profil-name">{{ this.data.user }}</span>
+                <span class="profil-email">{{ this.data.email }}</span>
+            </div>
+        </div>
+        <div class="profil-time-box">
+            <mat-icon fontIcon="schedule"></mat-icon>
+            <span class="profil-time">{{ this.time.toLocaleTimeString([], {hour:
+                '2-digit', minute:'2-digit'}) }} local time</span>
+        </div>
+    </div>
+    <!-- Message Bottom Section -->
+    <div class="message-container-bottom">
+        <button class="message-button"
+            (click)="this.chatService.openChat(this.data.id); dialogRef.close(); this.globalService.openComponent('chat')"
+            [disabled]="this.data.id == this.userSevice.currentUserId$">
+            <mat-icon fontIcon="question_answer"></mat-icon>Message</button>
+    </div>
+</div>

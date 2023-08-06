@@ -1,0 +1,67 @@
+<div class="container">
+    <!-- header -->
+    <div class="title-and-channel ">
+        <div class="title">Threads</div>
+    </div>
+
+    <!-- content -->
+    <div class="threads-container">
+        <div *ngFor="let threadCurrentUser of threadsFromCurrentUser; let i = index">
+            <div class="channel"># {{ threadCurrentUser.channel }}</div>
+            <div class="post">
+                <div class="user-message">
+                    <img src="{{ currentUserData.photoURL || '/assets/img/user/profile-picture.png' }}" (click)="getUserInformation(threadCurrentUser)">
+                    <div class="user-name-and-message">
+                        <div class="user-name-and-time">
+                            <div class="user-name" (click)="getUserInformation(threadCurrentUser)">{{
+                                currentUserData.displayName }}</div>
+                            <div class="time">{{ threadCurrentUser.date | dateAgo }}</div>
+                        </div>
+                        <div class="img-message">
+                            <div [innerHTML]="threadCurrentUser.content"></div>
+                            <div *ngIf="threadCurrentUser.images.length > 0">
+                                <div class="posting-attachment">
+                                    <img *ngFor="let image of threadCurrentUser.images"
+                                        (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                        class="image-attachment">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="comments-container" *ngIf="threadCurrentUser.replies.length > 0">
+                    <div class="comments"></div>
+                </div>
+
+                <div *ngFor="let threadReplies of this.threadsFromCurrentUser[i].replies" class="user-message-more">
+                    <img (click)="getUserInformationReplies(threadReplies)"
+                        src="{{threadReplies.user['image'] || '/assets/img/user/profile-picture.png' }}">
+                    <div class="user-name-and-message">
+                        <div class="user-name-and-time">
+                            <div class="user-name" (click)="getUserInformationReplies(threadReplies)">{{
+                                threadReplies.user['name']}}</div>
+                            <div class="time">{{ threadReplies.date | dateAgo }}</div>
+                        </div>
+                        <div>
+                            <div [innerHTML]="threadReplies.message"></div>
+                            <div *ngIf="threadReplies.images.length > 0">
+                                <div class="posting-attachment">
+                                    <img *ngFor="let image of threadReplies.images"
+                                        (click)="this.channelService.openCreateImageDialog(image)" [src]="image"
+                                        class="image-attachment">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-text-editor">
+                    <app-commentfield [parentName]="'threadshortcut'"
+                        [threadId]="threadsFromCurrentUser[i].threadId"></app-commentfield>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
