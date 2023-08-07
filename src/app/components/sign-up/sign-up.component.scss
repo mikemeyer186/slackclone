@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+
   @media (max-width: 900px) and (orientation: landscape) {
     padding: 16px;
     justify-content: flex-start;
@@ -35,7 +35,7 @@
   }
 
   .sign-up-link {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-left: 8px;
   }
 

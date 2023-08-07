@@ -16,12 +16,8 @@ import {
 } from '@angular/fire/auth';
 import { Channel } from '../models/channel.class';
 import { UsersService } from './users.service';
-import {
-  AuthProvider,
-  sendPasswordResetEmail,
-} from 'firebase/auth';
+import { AuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { UserTemplate } from '../models/usertemplate.class';
-
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +28,8 @@ export class AuthService {
     private firestoreService: FirestoreService,
     private auth: Auth,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    public usersService: UsersService
   ) {}
 
   user = new UserTemplate();
@@ -49,9 +46,9 @@ export class AuthService {
    * This method is used to sign up a new user. It creates a new user in the authentication service
    * and adds the user to the users collection in Firestore. It also updates the displayName of the
    * user in the authentication service.
-   * @param email 
-   * @param password 
-   * @param name 
+   * @param email
+   * @param password
+   * @param name
    */
   signUp = async (email: string, password: string, name: any) => {
     try {
@@ -63,9 +60,9 @@ export class AuthService {
             email,
             password
           );
-          this.updateAuthdisplayName(name);
         }
       );
+      this.usersService.currentUserName$ = name;
       this.toast.info(`Hi ${name}. Your were successfully signed up`);
       this.isUserLoggedIn = true;
       this.router.navigate(['/home']);
@@ -74,14 +71,13 @@ export class AuthService {
     }
   };
 
-
   /**
    * This method is used to sign in a user. It signs in the user in the authentication service.
    * It also sets the isUserLoggedIn property to true. If the sign in fails, it sets the isUserLoggedIn
    * property to false.
-   * @param email 
-   * @param password 
-   * @returns 
+   * @param email
+   * @param password
+   * @returns
    */
   signIn = async (email: string, password: string) => {
     const userCredentials = await signInWithEmailAndPassword(
@@ -106,11 +102,10 @@ export class AuthService {
     return userCredentials;
   };
 
-
   /**
    * Regular expression for email validation
-   * @param errorCode 
-   * @returns 
+   * @param errorCode
+   * @returns
    */
   getErrorMessage = (errorCode: string) => {
     if (errorCode === 'auth/user-not-found') {
@@ -122,12 +117,11 @@ export class AuthService {
     }
   };
 
-
   /**
    * Allows the user to sign in with Google. It uses the signInWithPopup method from the authentication
    * service. It also sets the isUserLoggedIn property to true. If the sign in fails, it sets the isUserLoggedIn
    * property to false.
-   * @returns 
+   * @returns
    */
   async signInWithGoogle(): Promise<any> {
     const user = await this.signInWithPopup(this.providerGoogle);
@@ -135,9 +129,9 @@ export class AuthService {
   }
 
   /**
-   * Userd by signInWithGoogle() 
-   * @param provider 
-   * @returns 
+   * Userd by signInWithGoogle()
+   * @param provider
+   * @returns
    */
   async signInWithPopup(provider: AuthProvider): Promise<any> {
     const auth = getAuth();
@@ -159,8 +153,8 @@ export class AuthService {
   /**
    * Updates the user object with the data from the authentication service. It also sets the isUserLoggedIn
    * property to true.
-   * @param result 
-   * @returns 
+   * @param result
+   * @returns
    */
   onSuccess(result: any) {
     const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -176,7 +170,7 @@ export class AuthService {
 
   /**
    * Method sends a password reset email to the user.
-   * @param email 
+   * @param email
    */
   resetPassword(email: string) {
     const auth = getAuth();
@@ -189,12 +183,11 @@ export class AuthService {
       });
   }
 
-/**
- * Updates the displayName of the user in the authentication service.
- * @param dName 
- */
+  /**
+   * Updates the displayName of the user in the authentication service.
+   * @param dName
+   */
   updateAuthdisplayName(dName) {
-    console.log('update Profile DisplayName');
     const auth = getAuth();
     updateProfile(auth.currentUser, {
       displayName: dName,
@@ -209,7 +202,7 @@ export class AuthService {
 
   /**
    * Updates the photoURL of the user in the authentication service.
-   * @param photoName 
+   * @param photoName
    */
   updateAuthPhoto(photoName) {
     console.log('update ProfilePhoto');
@@ -227,7 +220,7 @@ export class AuthService {
 
   /**
    * Gets the authenticated user from the authentication service.
-   * @returns 
+   * @returns
    */
   getAuthCredentials() {
     const auth = getAuth();

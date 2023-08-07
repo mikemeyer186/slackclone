@@ -48,7 +48,7 @@ export class DialogEditUserComponent {
     public usersService: UsersService,
     public firestoreService: FirestoreService,
     public authService: AuthService,
-    private toast: HotToastService,
+    private toast: HotToastService
   ) {}
 
   currentUserData$: UserTemplate;
@@ -71,7 +71,6 @@ export class DialogEditUserComponent {
     uid: false,
   };
 
-  
   currentUser$: any;
   currentUserId$: any;
   currentUser: UserTemplate;
@@ -101,7 +100,7 @@ export class DialogEditUserComponent {
    * // check if guest user is logged-in. This is important, because the guest user is not allowed to edit his profile.
    */
   checkIfGuestUserIsActive() {
-    if (this.currentUserId$ === 'FX6K2L7Xbgfouk3qmpCisBO1eT42') {
+    if (this.currentUserId$ === 'cQ9re6qPPvayUb85lekq8bIHdgw1') {
       this.isGuestUserActive = true;
     }
   }
@@ -148,6 +147,7 @@ export class DialogEditUserComponent {
     } else if (field === 'photoURL') {
       this.authService.updateAuthPhoto(value);
     }
+    this.isEditing[field] = true;
     this.cancelEdit(field);
   }
 
@@ -179,7 +179,7 @@ export class DialogEditUserComponent {
 
   /**
    * returns the download url of the uploaded file.
-   * @param fileName 
+   * @param fileName
    * @returns storageRef as string
    */
   private async getDownloadURL(fileName: string): Promise<string> {
@@ -188,22 +188,22 @@ export class DialogEditUserComponent {
     return getDownloadURL(storageRef);
   }
 
-/**
- * cancelEdit is called when the user clicks on the cancel button to stopp editing.
- * @param field 
- */
+  /**
+   * cancelEdit is called when the user clicks on the cancel button to stopp editing.
+   * @param field
+   */
   cancelEdit(field) {
     if (this.isEditing[field]) {
       this.isEditing[field] = false;
     } else {
       this.toast.error(`Sorry, the field ${field} was not being edited.`);
     }
-}
+  }
 
-/**
- * startEdit is called when the user clicks on the edit button to start editing.
- * @param field 
- */
+  /**
+   * startEdit is called when the user clicks on the edit button to start editing.
+   * @param field
+   */
   startEdit(field) {
     if (this.isEditing[field] === undefined) {
       throw new Error(`Cannot start editing unknown field: ${field}`);

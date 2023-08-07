@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -13,8 +13,9 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public searchText: string;
+  public userName: string = '';
 
   constructor(
     public authService: AuthService,
@@ -23,18 +24,17 @@ export class HeaderComponent {
     public firestore: FirestoreService,
     public dialog: MatDialog,
     public searchService: SearchService,
-    public globalService: GlobalService,
+    public globalService: GlobalService
   ) {}
 
-
-  async ngOnInit () {
+  async ngOnInit() {
     this.startSearchEvent();
   }
 
   toggleSidebar() {
     this.globalService.toggleSidebar();
   }
-  
+
   get authUser$() {
     return this.authService.getAuthCredentials();
   }
@@ -53,14 +53,13 @@ export class HeaderComponent {
     this.router.navigate(['']);
   }
 
-
   logFirebaseAuthCredentials() {
     this.authService.getAuthCredentials();
   }
 
-/**
- * open dialog for editing user
- */
+  /**
+   * open dialog for editing user
+   */
   openDialog() {
     this.dialog.open(DialogEditUserComponent, {
       panelClass: 'dialog-panel', // Aad a custom panel class
@@ -70,7 +69,6 @@ export class HeaderComponent {
       maxWidth: '100vw',
     });
   }
-
 
   /**
    * start search event after 1 second (to prevent errors)
