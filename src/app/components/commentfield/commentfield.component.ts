@@ -7,7 +7,6 @@ import { ChatService } from 'src/app/services/chat.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
 
-
 @Component({
   selector: 'app-commentfield',
   templateUrl: './commentfield.component.html',
@@ -27,7 +26,7 @@ export class CommentfieldComponent implements OnInit {
   imageURLs: string[];
 
   editorStyle = {
-    height: '100px',
+    height: '70px',
   };
 
   selectedFile: File;
@@ -48,24 +47,24 @@ export class CommentfieldComponent implements OnInit {
       'emoji-toolbar': true,
       toolbar: {
         container: [
-          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          ['bold', 'italic', 'underline'], // toggled buttons
           ['blockquote', 'code-block'],
           [{ list: 'ordered' }, { list: 'bullet' }],
           ['image'], // image
           ['emoji'],
         ],
         handlers: {
-          emoji: function () { },
+          emoji: function () {},
         },
       },
       keyboard: {
         bindings: {
           enter: {
             key: 13, // Disable handling of Enter key
-            handler: () => { },
+            handler: () => {},
           },
-        }
-      }
+        },
+      },
     };
   }
 
@@ -77,8 +76,8 @@ export class CommentfieldComponent implements OnInit {
   }
 
   /**
-  * Function to remove the <img> tag from the editor content.
-  */
+   * Function to remove the <img> tag from the editor content.
+   */
   removeImgTagFromEditorContent(editorContent: string): string {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = editorContent;
@@ -97,9 +96,13 @@ export class CommentfieldComponent implements OnInit {
     this.editorContent = this.editorForm.get('editor').value;
     if (this.editorContent != null) {
       if (this.base64Attachement.length > 4) {
-        alert('You have exceeded the maximum number of images. You can upload a maximum of four images.');
+        alert(
+          'You have exceeded the maximum number of images. You can upload a maximum of four images.'
+        );
       } else {
-        this.editorContent = this.removeImgTagFromEditorContent(this.editorContent);
+        this.editorContent = this.removeImgTagFromEditorContent(
+          this.editorContent
+        );
         if (this.base64Array.length > 0) {
           for (let i = 0; i < this.base64Array.length; i++) {
             const file = this.base64Array[i];
@@ -114,10 +117,10 @@ export class CommentfieldComponent implements OnInit {
   }
 
   /**
-  * push image urls to array
-  * @param base64Array - array of base64 images
-  * @returns - array of image urls
-  */
+   * push image urls to array
+   * @param base64Array - array of base64 images
+   * @returns - array of image urls
+   */
   pushImgageUrlsToArray(base64Array: any) {
     let imageURLs: string[] = [];
     for (let i = 0; i < base64Array.length; i++) {
@@ -126,10 +129,9 @@ export class CommentfieldComponent implements OnInit {
     return imageURLs;
   }
 
-
   /**
-  * Add the thread to the corresponding component depending on the call of the text-editor.
-  */
+   * Add the thread to the corresponding component depending on the call of the text-editor.
+   */
   handleParentAction() {
     if (this.parentName == 'channel') {
       this.channelService.addNewMessage(this.editorContent, this.imageURLs);
@@ -154,8 +156,8 @@ export class CommentfieldComponent implements OnInit {
   }
 
   /**
-* Empty the text editor after submitting the thread.
-*/
+   * Empty the text editor after submitting the thread.
+   */
   clearTextEditor() {
     this.editorForm.get('editor').setValue(null);
     this.base64Attachement = [];
@@ -163,7 +165,7 @@ export class CommentfieldComponent implements OnInit {
   }
 
   /**
-   * Saves the images in the Firestore storage. 
+   * Saves the images in the Firestore storage.
    */
   async onFileSelected(file: any, index: number): Promise<void> {
     this.isUploading = true;
@@ -214,18 +216,21 @@ export class CommentfieldComponent implements OnInit {
   };
 
   /**
-  * Deals with the upload images and prepares the images for the Firestore storage.
-  */
+   * Deals with the upload images and prepares the images for the Firestore storage.
+   */
   handleFileUpload(file: any, range: any) {
     const reader = new FileReader();
     reader.onload = () => {
       const base64Images = reader.result.toString();
       const fileName = file.name; // Get the original file name
       this.base64Attachement.push(base64Images);
-      const base64WithFileName = this.getBase64WithFileName(base64Images, fileName);
+      const base64WithFileName = this.getBase64WithFileName(
+        base64Images,
+        fileName
+      );
       const base64ArrayJson = {
         base64: base64Images,
-        fileName: base64WithFileName
+        fileName: base64WithFileName,
       };
       this.base64Array.push(base64ArrayJson);
       this.quillEditorRef.insertEmbed(range.index, 'image', base64Images);
@@ -253,6 +258,9 @@ export class CommentfieldComponent implements OnInit {
     }
     if (index >= 0 && index < this.base64Array.length) {
       this.base64Array.splice(index, 1);
+    }
+    if (index == 0 && this.editorForm.get('editor').value == null) {
+      this.editorForm.get('editor').setValue(null);
     }
   }
 

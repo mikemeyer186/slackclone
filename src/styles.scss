@@ -57,22 +57,53 @@ body {
   display: none;
 }
 
-//Emoji
-
 .ql-toolbar.ql-snow {
   background-color: rgb(123, 123, 123, 0.3);
   border-radius: 10px 10px 0 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: none;
 }
 
 .ng-star-inserted.ql-container.ql-snow {
-  background-color: white;
-  border-radius: 0 0 10px 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -60px inset;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: none;
+  border-bottom: none;
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none;
+  stroke: $textgrey !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: $textgrey;
+  stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+  color: $textgrey;
+}
+
+button:hover .ql-stroke,
+.ql-picker-label:hover .ql-stroke {
+  fill: none;
+  stroke: white !important;
+}
+
+button:hover .ql-fill,
+.ql-picker-label:hover .ql-fill {
+  fill: white !important;
+  stroke: none;
 }
 
 .ql-editor {
-  background-color: white;
+  background-color: $grey;
+  color: $textgrey;
+  padding: 12px 15px 20px 15px;
 
   img {
     display: none;

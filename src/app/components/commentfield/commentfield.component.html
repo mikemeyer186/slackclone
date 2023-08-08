@@ -2,7 +2,7 @@
     <div>
         <form [formGroup]="editorForm" (submit)="onSubmit()" (keydown.enter)="onEnterKey($event)">
             <div>
-                <quill-editor formControlName="editor" #textEditor class="quill-text-editor" placeholder="Answers ..."
+                <quill-editor formControlName="editor" #textEditor class="quill-text-editor" placeholder="Answer..."
                     [style]="editorStyle" [modules]="quillModules" (onContentChanged)="maxLength($event)"
                     (onEditorCreated)="getEditorInstance($event)">
                 </quill-editor>
@@ -15,13 +15,13 @@
                             <img (click)="this.channelService.openCreateImageDialog(base64)" src="{{base64}}"
                                 alt="Empty">
                             <div class="close-icon">
-                                <img (click)="deleteTemporaryImages(i)" src="assets/img/commentfield/close.png">
+                                <mat-icon (click)="deleteTemporaryImages(i)" fontIcon="close"></mat-icon>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="send-btn-container">
-                    <button class="send-btn" type="submit"><img src="assets/img/commentfield/send-icon.png"></button>
+                    <button class="send-btn" type="submit"><mat-icon fontIcon="send"></mat-icon></button>
                     <div class="loading">
                         <mat-spinner *ngIf="isUploading"></mat-spinner>
                     </div>
