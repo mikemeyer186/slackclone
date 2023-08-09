@@ -1,5 +1,12 @@
 import { UsersService } from './../../services/users.service';
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  EventEmitter,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import 'quill-emoji/dist/quill-emoji.js';
 import { ChannelService } from 'src/app/services/channel.service';
@@ -24,13 +31,12 @@ export class CommentfieldComponent implements OnInit {
   base64Attachement: any[];
   uid: any;
   imageURLs: string[];
-
+  boxHeight: EventEmitter<number> = new EventEmitter<number>();
+  selectedFile: File;
+  isUploading: boolean;
   editorStyle = {
     height: '70px',
   };
-
-  selectedFile: File;
-  isUploading: boolean;
 
   constructor(
     public channelService: ChannelService,
@@ -40,6 +46,9 @@ export class CommentfieldComponent implements OnInit {
     public uploadImagesService: UploadImagesService
   ) {
     this.base64Attachement = [];
+    this.boxHeight.subscribe((height) => {
+      this.setEditorHeight(height);
+    });
 
     this.quillModules = {
       'emoji-shortname': true,
@@ -73,6 +82,29 @@ export class CommentfieldComponent implements OnInit {
       editor: new FormControl(null),
     });
     this.getCurrentUserId();
+    this.textEventListener();
+  }
+
+  /**
+   * event listener for the text editor on keyup
+   */
+  textEventListener() {
+    const editor = document.getElementById('box');
+    document.getElementById('box').addEventListener('keyup', (e) => {
+      this.editorContent = this.editorForm.get('editor').value;
+      this.setEditorHeight(editor.clientHeight);
+    });
+  }
+
+  /**
+   * sets the height of the editor to channel and chat service for calculating the padding-bottom
+   * @param height - height of the editor
+   */
+  setEditorHeight(height: number) {
+    if (this.parentName === 'channel' || this.parentName === 'chat') {
+      this.channelService.editorHeight = height + 'px';
+      this.chatService.editorHeight = height + 'px';
+    }
   }
 
   /**
@@ -213,6 +245,7 @@ export class CommentfieldComponent implements OnInit {
       }
     });
     input.click();
+    this.emitBoxHeight(158);
   };
 
   /**
@@ -236,6 +269,7 @@ export class CommentfieldComponent implements OnInit {
       this.quillEditorRef.insertEmbed(range.index, 'image', base64Images);
     };
     reader.readAsDataURL(file);
+    this.emitBoxHeight(158);
   }
 
   /**
@@ -259,16 +293,29 @@ export class CommentfieldComponent implements OnInit {
     if (index >= 0 && index < this.base64Array.length) {
       this.base64Array.splice(index, 1);
     }
-    if (index == 0 && this.editorForm.get('editor').value == null) {
-      this.editorForm.get('editor').setValue(null);
-    }
+    this.emitBoxHeight();
   }
 
+  /**
+   * on enter key press, submit the message
+   * @param event - event of the enter key
+   */
   onEnterKey(event: Event) {
     const keyboardEvent = event as KeyboardEvent;
     if (keyboardEvent.key === 'Enter' && !keyboardEvent.shiftKey) {
       keyboardEvent.preventDefault(); // Prevent new line from being added
       this.onSubmit(); // Submit the message
     }
+  }
+
+  /**
+   * emits the height of the box to event emitter
+   */
+  emitBoxHeight(height?: number) {
+    setTimeout(() => {
+      const boxHeight = document.getElementById('box').clientHeight;
+      height = height ? height : boxHeight;
+      this.boxHeight.emit(height);
+    }, 50);
   }
 }

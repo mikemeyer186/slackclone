@@ -19,6 +19,7 @@ export class ChatService {
   chatHistory: Array<any> = [];
   unfilteredChatHistory: Array<any> = [];
   chatPartner: any;
+  editorHeight: string = '121px';
   scrollStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(

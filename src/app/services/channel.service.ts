@@ -34,6 +34,7 @@ export class ChannelService {
   scrollStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
   imageURL: string;
   imageSource: string;
+  editorHeight: string = '121px';
 
   constructor(
     public channelDialog: MatDialog,
@@ -41,7 +42,7 @@ export class ChannelService {
     public firestoreService: FirestoreService,
     public globalService: GlobalService,
     public userService: UsersService,
-    public chatService: ChatService,
+    public chatService: ChatService
   ) {}
 
   /**
@@ -235,7 +236,8 @@ export class ChannelService {
     this.globalService.threadsRightSideOpened = true;
     this.getNameOpenThread();
     this.getUserNameReplies();
-    this.imageSource = this.activeThread.user['image'] || 'assets/img/user/profile-picture.png';
+    this.imageSource =
+      this.activeThread.user['image'] || 'assets/img/user/profile-picture.png';
   }
 
   /**

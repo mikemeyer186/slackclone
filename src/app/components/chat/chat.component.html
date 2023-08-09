@@ -15,7 +15,8 @@
         </div>
     </div>
 
-    <div id="chat-content" class="chat-content" [class.no-editor-padding]="!this.showEditor">
+    <div id="chat-content" class="chat-content" [class.no-editor-padding]="!this.showEditor"
+        [ngStyle]="{'padding-bottom': this.chatService.editorHeight}">
 
         <div *ngFor="let partner of this.chatService.activeChatPartnerList" class="chat-top">
             <img src="{{ partner.image }}"
