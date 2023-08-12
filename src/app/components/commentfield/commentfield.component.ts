@@ -31,7 +31,6 @@ export class CommentfieldComponent implements OnInit {
   base64Attachement: any[];
   uid: any;
   imageURLs: string[];
-  boxHeight: EventEmitter<number> = new EventEmitter<number>();
   selectedFile: File;
   isUploading: boolean;
   editorStyle = {
@@ -46,9 +45,6 @@ export class CommentfieldComponent implements OnInit {
     public uploadImagesService: UploadImagesService
   ) {
     this.base64Attachement = [];
-    this.boxHeight.subscribe((height) => {
-      this.setEditorHeight(height);
-    });
 
     this.quillModules = {
       'emoji-shortname': true,
@@ -89,10 +85,11 @@ export class CommentfieldComponent implements OnInit {
    * event listener for the text editor on keyup
    */
   textEventListener() {
-    const editor = document.getElementById('box');
     document.getElementById('box').addEventListener('keyup', (e) => {
-      this.editorContent = this.editorForm.get('editor').value;
-      this.setEditorHeight(editor.clientHeight);
+      this.setEditorHeight();
+    });
+    document.getElementById('box').addEventListener('touchend', (e) => {
+      this.setEditorHeight();
     });
   }
 
@@ -100,11 +97,16 @@ export class CommentfieldComponent implements OnInit {
    * sets the height of the editor to channel and chat service for calculating the padding-bottom
    * @param height - height of the editor
    */
-  setEditorHeight(height: number) {
-    if (this.parentName === 'channel' || this.parentName === 'chat') {
-      this.channelService.editorHeight = height + 'px';
-      this.chatService.editorHeight = height + 'px';
-    }
+  setEditorHeight() {
+    setTimeout(() => {
+      let boxHeight: number = document.getElementById('box').clientHeight;
+      console.log(boxHeight);
+
+      if (this.parentName === 'channel' || this.parentName === 'chat') {
+        this.channelService.editorHeight = boxHeight + 'px';
+        this.chatService.editorHeight = boxHeight + 'px';
+      }
+    }, 50);
   }
 
   /**
@@ -245,7 +247,6 @@ export class CommentfieldComponent implements OnInit {
       }
     });
     input.click();
-    this.emitBoxHeight(158);
   };
 
   /**
@@ -267,9 +268,9 @@ export class CommentfieldComponent implements OnInit {
       };
       this.base64Array.push(base64ArrayJson);
       this.quillEditorRef.insertEmbed(range.index, 'image', base64Images);
+      this.setEditorHeight();
     };
     reader.readAsDataURL(file);
-    this.emitBoxHeight(158);
   }
 
   /**
@@ -293,7 +294,7 @@ export class CommentfieldComponent implements OnInit {
     if (index >= 0 && index < this.base64Array.length) {
       this.base64Array.splice(index, 1);
     }
-    this.emitBoxHeight();
+    this.setEditorHeight();
   }
 
   /**
@@ -306,16 +307,5 @@ export class CommentfieldComponent implements OnInit {
       keyboardEvent.preventDefault(); // Prevent new line from being added
       this.onSubmit(); // Submit the message
     }
-  }
-
-  /**
-   * emits the height of the box to event emitter
-   */
-  emitBoxHeight(height?: number) {
-    setTimeout(() => {
-      const boxHeight = document.getElementById('box').clientHeight;
-      height = height ? height : boxHeight;
-      this.boxHeight.emit(height);
-    }, 50);
   }
 }
