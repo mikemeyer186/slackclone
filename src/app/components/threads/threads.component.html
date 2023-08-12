@@ -5,10 +5,10 @@
             <div class="title">Thread</div>
             <div class="channel"># {{ this.channelService.activeThread.channel }}</div>
         </div>
-        <div class="close" (click)="closeThread()"><img src="assets/img/threads/close.png"></div>
+        <div class="close" (click)="closeThread()"><mat-icon fontIcon="close"></mat-icon></div>
     </div>
 
-    <div class="threads-container">
+    <div id="threads-container" class="threads-container">
 
         <div class="post">
             <div class="user-message">
@@ -20,7 +20,8 @@
                         <div class="time">{{ this.channelService.activeThread.date | dateAgo }}</div>
                     </div>
                     <div>
-                        <div class="content-thread-container" [innerHTML]="this.channelService.activeThread.content" #contentContainer></div>
+                        <div class="content-thread-container" [innerHTML]="this.channelService.activeThread.content"
+                            #contentContainer></div>
                         <div *ngIf="this.channelService.activeThread.images.length > 0">
                             <div class="posting-attachment">
                                 <img *ngFor="let image of this.channelService.activeThread.images"

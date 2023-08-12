@@ -21,7 +21,6 @@
   left: 0;
   right: 0;
   background-color: $darkgrey;
-  padding-bottom: 36px;
   overflow-y: auto;
   width: 100%;
 }
@@ -33,6 +32,7 @@
   border-bottom: $normalBorder;
   height: $componentHeaderHeight;
   z-index: 1;
+  color: $textgrey;
 
   img {
     width: 20px;
@@ -48,28 +48,23 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 125ms ease-in-out;
 
   &:hover {
-    opacity: 0.8;
+    color: $white;
   }
 }
 
 .post {
-  margin-top: 24px;
-  margin-left: 8px;
-  margin-right: 8px;
-  background-color: $threadgray;
+  background-color: $darkgrey;
   border-radius: 10px;
-  padding: 36px;
-
-  @media (max-width: $breakpointExpanded) {
-    padding: 24px;
-  }
+  color: $textgrey;
 }
 
 .title {
   color: $white;
   font-size: $fonttitle;
+  font-weight: 500;
 }
 
 .channel {
@@ -80,12 +75,11 @@
 
 .user-message {
   display: flex;
-  margin-left: 8px;
-  margin-right: 8px;
-  padding: 12px;
+  padding: 24px;
+  transition: all 125ms ease-in-out;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: $grey;
   }
 
   img {
@@ -106,10 +100,12 @@
   justify-content: center;
   margin-left: 10px;
   font-size: $regular;
+  font-weight: 300;
 }
 
 .user-name {
-  font-weight: 800;
+  color: $white;
+  font-weight: 500;
   margin-right: 10px;
 
   &:hover {
@@ -125,12 +121,12 @@
 .time {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  color: $grey;
+  font-size: $small;
+  font-weight: 300;
+  color: $silvergrey;
 }
 
 .content-thread-container {
-
   img {
     display: none !important;
   }
@@ -151,19 +147,18 @@
 
 .user-message-more {
   display: flex;
-  margin-left: 8px;
-  margin-right: 8px;
-  margin-top: 16px;
-  padding: 12px;
+  padding: 24px;
+  transition: all 125ms ease-in-out;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: $grey;
   }
 
   img {
     width: 50px;
     height: 50px;
     border-radius: 10px;
+    object-fit: cover;
 
     &:hover {
       cursor: pointer;
@@ -173,7 +168,7 @@
 
 .amount-comments {
   display: flex;
-  margin-left: 24px;
+  padding: 24px;
 }
 
 .replies {
@@ -190,7 +185,7 @@
 .comment-line {
   width: 100vw;
   height: 0;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: $thinBorder;
   margin-left: 16px;
   margin-right: 16px;
   width: 100vw;
@@ -198,8 +193,7 @@
 }
 
 .box-text-editor {
-  margin-top: 36px;
-  margin-left: 16px;
+  padding: 0 24px 10px 24px;
 }
 
 .image-attachment {

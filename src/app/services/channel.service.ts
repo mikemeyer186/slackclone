@@ -34,7 +34,7 @@ export class ChannelService {
   scrollStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
   imageURL: string;
   imageSource: string;
-  editorHeight: string = '121px';
+  editorHeight: string = '125px';
 
   constructor(
     public channelDialog: MatDialog,

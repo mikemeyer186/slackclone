@@ -24,9 +24,8 @@ export class ThreadsComponent implements OnInit {
     public firestoreService: FirestoreService,
     public usersService: UsersService,
     public channelService: ChannelService,
-    public globalService: GlobalService,
-  ) {
-  }
+    public globalService: GlobalService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getAllThreads();
@@ -34,11 +33,12 @@ export class ThreadsComponent implements OnInit {
     this.getCurrentUserId();
     this.getThreadsFromCurrentUser();
     this.getAllUser();
+    this.scrollToBottomOfContent();
   }
 
   /**
-  * Gets all the threads from the Firestore
-  */
+   * Gets all the threads from the Firestore
+   */
   async getAllThreads() {
     this.allThreads = await this.firestoreService.getAllThreads();
   }
@@ -77,8 +77,8 @@ export class ThreadsComponent implements OnInit {
   }
 
   /**
-  * Fetches the information for the user to display user details as a pop-up window
-  */
+   * Fetches the information for the user to display user details as a pop-up window
+   */
   getUserInformation() {
     let currentUserId = this.channelService.activeThread.user['id'];
     this.openProfileDetail(currentUserId);
@@ -87,15 +87,15 @@ export class ThreadsComponent implements OnInit {
   /**
    * Fetches the information for the user to display user details as a pop-up window
    * But this time from the replies
-  */
+   */
   getUserInformationFromReplies(user) {
     let currentUserId = user['id'];
     this.openProfileDetail(currentUserId);
   }
 
   /**
-  *  Opens the profile details in the pop-up window
-  */
+   *  Opens the profile details in the pop-up window
+   */
   openProfileDetail(currentUserId) {
     for (let i = 0; i < this.allUser.length; i++) {
       if (currentUserId == this.allUser[i].uid) {
@@ -105,18 +105,24 @@ export class ThreadsComponent implements OnInit {
     let name = this.currentUser.displayName;
     let image = this.currentUser.photoURL;
     let email = this.currentUser.email;
-    this.channelService.messageDialogOpen(
-      name,
-      image,
-      email,
-      currentUserId
-    );
+    this.channelService.messageDialogOpen(name, image, email, currentUserId);
   }
 
   /**
-  *  Closes the thread
-  */
+   *  Closes the thread
+   */
   closeThread() {
     this.globalService.threadsRightSideOpened = false;
+  }
+
+  /**
+   * scroll to the bottom of the channel-content
+   * @param style - smooth or instant
+   */
+  scrollToBottomOfContent(): void {
+    try {
+      let content = document.getElementById('threads-container') || undefined;
+      content.scrollTo({ top: content.scrollHeight });
+    } catch (err) {}
   }
 }
