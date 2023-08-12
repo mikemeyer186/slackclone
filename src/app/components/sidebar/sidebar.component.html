@@ -1,5 +1,6 @@
-<mat-drawer class="sidebar" [class.open]="!(globalService.isSidebarOpen$ | async)" [class.close]="globalService.isSidebarOpen$ | async" #sidebar
-    opened="{{ globalService.isSidebarOpen$ | async }}" [mode]="drawerMode" autoFocus="false">
+<mat-drawer class="sidebar" [class.open]="!(globalService.isSidebarOpen$ | async)"
+    [class.close]="globalService.isSidebarOpen$ | async" #sidebar opened="{{ globalService.isSidebarOpen$ | async }}"
+    [mode]="drawerMode" autoFocus="false">
     <!-- Sidebar Header -->
     <div class="title">
         <img class="logo" src="./assets/img/slackclone_white.png">
@@ -29,13 +30,14 @@
             </mat-icon>
             <span (click)="openCreateChannelDialog()">
                 Channels
-                <mat-icon>add icon</mat-icon>
+                <mat-icon class="add-icon">add icon</mat-icon>
             </span>
         </div>
         <div *ngIf="channelsAreOpen" class="drop-down-content">
 
             <div *ngFor="let channel of channels; let i = index" (click)="renderChannel(channel); checkSidebarClosing()"
-                class="drop-down-element" [ngClass]="{'drop-down-element': true, 'active-sidebar-element': channel.isActive}">
+                class="drop-down-element"
+                [ngClass]="{'drop-down-element': true, 'active-sidebar-element': channel.isActive}">
                 <mat-icon class="drop-down-img">numbers</mat-icon>
                 <span>{{ channel.title }}</span>
             </div>
@@ -55,12 +57,13 @@
             </mat-icon>
             <span (click)="openCreateChatDialog()">
                 Directmessages
-                <mat-icon>add icon</mat-icon>
+                <mat-icon class="add-icon">add icon</mat-icon>
             </span>
         </div>
         <div *ngIf="directmessagesAreOpen" class="drop-down-content">
-            <div *ngFor="let chatPartner of chatPartners; let i = index" (click)="renderChat(chatPartner); checkSidebarClosing()"
-                class="drop-down-element" [ngClass]="{'drop-down-element': true, 'active-sidebar-element': chatPartner.isActive}">
+            <div *ngFor="let chatPartner of chatPartners; let i = index"
+                (click)="renderChat(chatPartner); checkSidebarClosing()" class="drop-down-element"
+                [ngClass]="{'drop-down-element': true, 'active-sidebar-element': chatPartner.isActive}">
                 <img class="drop-down-img" src="{{ chatPartner.photoURL || 'assets/img/user/profile-picture.png' }}">
                 <span>{{ chatPartner.displayName }}</span>
             </div>

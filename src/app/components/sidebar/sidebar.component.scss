@@ -1,214 +1,215 @@
 @import "../../../styles/main.scss";
 
 .sidebar {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: $sidebarWidth;
-    height: calc(100vh - $menuHeight);
-    overflow-y: auto;
-    background-color: $grey;
-    color: $white;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 2;
-    transition: transform 0.3s ease;
-    outline: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: $sidebarWidth;
+  height: calc(100vh - $menuHeight);
+  overflow-y: auto;
+  background-color: $grey;
+  color: $white;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  transition: transform 0.3s ease;
+  outline: none;
 }
 
 .open {
-    animation: slide-In 0.3s ease;
+  animation: slide-In 0.3s ease;
 }
 
 .close {
-    animation: slide-Out 0.3s ease;
+  animation: slide-Out 0.3s ease;
 }
 
 .title {
-    padding: $spacingRegular;
-    font-size: $fonttitle;
-    height: $componentHeaderHeight;
-    border-bottom: 1px solid rgba($white, 0.2);
-    padding: 16px;
-    display: flex;
-    align-items: center;
+  padding: $spacingRegular;
+  font-size: $fonttitle;
+  height: $componentHeaderHeight;
+  border-bottom: 1px solid rgba($white, 0.2);
+  padding: 16px;
+  display: flex;
+  align-items: center;
 
-    .logo{
-        width: 200px;
-    }
+  .logo {
+    width: 200px;
+  }
 }
 
 .shortcuts-container {
-    padding: $spacingRegular;
-    border-bottom: 1px solid rgba($white, 0.2);
+  padding: $spacingRegular;
+  border-bottom: 1px solid rgba($white, 0.2);
 
-    .shortcut {
-        display: flex;
-        align-items: center;
-        height: 28px;
-        padding: 0 $spacingRegular;
-        border-radius: 5px;        
-        cursor: pointer;
+  .shortcut {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 $spacingRegular;
+    border-radius: 5px;
+    cursor: pointer;
 
-        mat-icon {
-            font-size: $fontsubtitle;
-            height: $fontsubtitle;
-            width: $fontsubtitle;
-            margin-right: 8px;
-        }
-
-        span {
-            font-size: $regular;
-        }
-
-        &:hover {
-            background-color: rgba(255,255,255,0.2);  
-        }
+    mat-icon {
+      font-size: $fontsubtitle;
+      height: $fontsubtitle;
+      width: $fontsubtitle;
+      margin-right: 8px;
     }
 
-    a {
-        text-decoration: none;
-        color: white;
+    span {
+      font-size: $regular;
     }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .sidebar-drop-down-container {
-    padding: $spacingRegular;
+  padding: $spacingRegular;
 
-    .drop-down-button {
-        display: flex;
-        align-items: center;
-        font-size: $regular;
-        
-        .collapsIcon {
-            cursor: pointer;
-            border-radius: 5px;
-            &:hover {
-                background-color: rgba(255,255,255,0.2);
-            }
-        }
+  .drop-down-button {
+    display: flex;
+    align-items: center;
+    font-size: $regular;
 
-        span {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            border-radius: 5px;
-            padding: 4px;
-
-            mat-icon {
-                opacity: 0;
-            }
-            
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-                transition: 125ms ease-in-out;
-                
-                mat-icon {
-                    opacity: 1;
-                }
-            }
-        }
-
+    .collapsIcon {
+      cursor: pointer;
+      border-radius: 5px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
     }
 
-    .drop-down-content {
-        font-size: $small;
+    span {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 4px;
 
-        .drop-down-element {
-            display: flex;
-            align-items: center;
-            height: 28px;
-            padding: 0 $spacingRegular;
-            border-radius: 5px;
-            cursor: pointer;
-        
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-        
-            .drop-down-img {
-                font-size: $fontsubtitle;
-                height: $fontsubtitle;
-                width: $fontsubtitle;
-                margin-right: 8px;
-                border-radius: 5px;
-            }
-        }
+      mat-icon {
+        opacity: 0;
+      }
 
-        .add-btn {
-            padding: 0 8px;
-            
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transition: 125ms ease-in-out;
+
+        mat-icon {
+          opacity: 1;
         }
+      }
     }
+
+    .add-icon {
+      font-size: 20px;
+      transform: translate(3px, 2px);
+    }
+  }
+
+  .drop-down-content {
+    font-size: $small;
+
+    .drop-down-element {
+      display: flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 $spacingRegular;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .drop-down-img {
+        font-size: $fontsubtitle;
+        height: $fontsubtitle;
+        width: $fontsubtitle;
+        margin-right: 8px;
+        border-radius: 5px;
+      }
+    }
+
+    .add-btn {
+      padding: 0 15px;
+    }
+  }
 }
 
 .rotate90 {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
-
 .active-sidebar-element {
-    background-color: rgba($white, 0.8);
-    color: $darkgrey;
-    font-weight: bold;
-    transition: 125ms ease-in-out;
+  background-color: rgba($white, 0.8);
+  color: $darkgrey;
+  font-weight: bold;
+  transition: 125ms ease-in-out;
 
-    &:hover {
-        background-color: rgba($white, 0.8) !important;
-        color: $darkgrey !important;
-        font-weight: bold !important;
-    }
+  &:hover {
+    background-color: rgba($white, 0.8) !important;
+    color: $darkgrey !important;
+    font-weight: bold !important;
+  }
 }
 
 @keyframes slide-Out {
-    from{
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-$sidebarWidth);
-    }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-$sidebarWidth);
+  }
 }
 
 @keyframes slide-In {
-    from{
-        transform: translateX(-$sidebarWidth);
-    }
-    to {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(-$sidebarWidth);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slide-Out-Resp {
-    from{
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100vw);
-    }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
 }
 
 @keyframes slide-In-Resp {
-    from{
-        transform: translateX(-100vw);
-    }
-    to {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(-100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @media screen and (max-width: $breakpointCompact) {
-    .sidebar {
-        position: absolute;
-        left: 0;
-        right: 0;
-        width: auto;
-    }
+  .sidebar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: auto;
+  }
 
-    .open {
-        animation: slide-In-Resp 0.3s ease;
-    }
-    
-    .close {
-        animation: slide-Out-Resp 0.3s ease;
-    }
-    
+  .open {
+    animation: slide-In-Resp 0.3s ease;
+  }
+
+  .close {
+    animation: slide-Out-Resp 0.3s ease;
+  }
 }

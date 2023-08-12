@@ -2,7 +2,7 @@
     <mat-icon class="close-icon" fontIcon="close" mat-button mat-dialog-close></mat-icon>
     <!-- Dialog Top Section -->
     <div class="dialog-top">
-        <h1>Create a channel</h1>
+        <h1>Create a new channel</h1>
     </div>
     <!-- Dialog Main Section -->
     <div class="dialog-main">
@@ -12,7 +12,8 @@
                 <mat-icon>numbers</mat-icon>
                 <input [(ngModel)]="channelName" class="channel-input" type="text" placeholder="z. B. community">
             </div>
-            <p class="dialog-description">Channels are conversations around a topic. Use a name that is easy to find and understand.</p>
+            <p class="dialog-description">Channels are conversations around a topic. Use a name that is easy to find and
+                understand.</p>
             <div mat-dialog-actions class="btn-container">
                 <button mat-button [disabled]="!channelName" class="btn" (click)="createChannel()">Create</button>
             </div>

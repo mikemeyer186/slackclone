@@ -1,9 +1,9 @@
 @import "../../../styles/main.scss";
 
-
-.title{
-  font-size: 45px;
+.title {
+  color: $white;
 }
+
 .profile-image {
   width: 100px;
   height: 100px;
@@ -15,6 +15,7 @@
   color: $white;
   width: clamp(200px, 1200px, 100%);
   position: relative;
+  border-top: $thinBorder;
 
   @media (max-width: $breakpointCompact) {
     display: flex;
@@ -23,15 +24,15 @@
     flex-direction: column;
   }
 
-  .dialog-top{
+  .dialog-top {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
   }
-  
-  .length20{
-    width:240px
+
+  .length20 {
+    width: 240px;
   }
   .field-name {
     color: rgba($textgrey, 0.5);
@@ -55,7 +56,6 @@
     line-height: 16px;
     background-color: tan;
   }
-
 
   .table-grid {
     display: grid;
@@ -139,7 +139,7 @@
       font-size: $small;
       text-align: center;
     }
-  
+
     .dialog-main-box {
       border: 1px solid rgba($textgrey, 0.2);
       border-radius: 8px;

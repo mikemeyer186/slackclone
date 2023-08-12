@@ -1,3 +1,5 @@
+@import "./variables";
+
 mat-icon {
   cursor: pointer;
 }
@@ -11,12 +13,17 @@ mat-toolbar-row {
   padding: 16px !important;
 }
 
+.mdc-dialog__container {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+}
+
 .dialog-panel
   .mat-mdc-dialog-container
   .mdc-dialog__container
   .mat-mdc-dialog-surface {
   background-color: $grey;
-  border: 1px solid $silvergrey;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 8px;
 
   .mdc-dialog__title::before {
@@ -28,21 +35,20 @@ mat-toolbar-row {
   }
   .mat-icon {
     cursor: pointer;
-    color: $white;
+    color: $textgrey;
     margin: 0 0;
     transition: all 125ms ease-in-out;
     @media (max-width: $breakpointCompact) {
       position: inherit;
     }
     &:hover {
-      opacity: 0.7;
+      color: $white;
     }
   }
 
   .title {
-    color: rgba($textgrey, 0.5) !important;
-    font-size: $fonttitle !important;
-    font-weight: 400 !important;
+    color: $white;
+
     @media (max-width: $breakpointCompact) {
       font-size: $small !important;
     }
@@ -53,15 +59,29 @@ mat-toolbar-row {
   }
 
   .dialog-top {
-    border-bottom: 1px solid rgba($textgrey, 0.5);
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-direction: row;
+    padding: 24px;
+    background-color: $darkgrey;
+
+    mat-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
     @media (max-width: $breakpointCompact) {
       justify-content: space-between;
       align-items: center;
       flex-direction: column-reverse;
+    }
+  }
+
+  .dialog-main {
+    mat-icon {
+      font-size: 20px;
+      transform: translate(2px, 3px);
     }
   }
 }
