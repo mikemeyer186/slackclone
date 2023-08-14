@@ -50,7 +50,7 @@ export class AuthService {
    * @param password
    * @param name
    */
-  signUp = async (email: string, password: string, name: any) => {
+  async signUp(email: string, password: string, name: any) {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password).then(
         (userCredentials) => {
@@ -69,7 +69,7 @@ export class AuthService {
     } catch (err) {
       this.toast.error(err.message);
     }
-  };
+  }
 
   /**
    * This method is used to sign in a user. It signs in the user in the authentication service.

@@ -14,34 +14,31 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
-export function passwordsMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordsDontMatch: true };
-    } else {
-      return null;
-    }
-  };
-}
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  signUpForm = this.fb.group(
-    {
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-    },
-    { validators: passwordsMatchValidator() }
-  );
+  signUpForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', Validators.required],
+  });
+
+  passwordsMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let password = this.signUpForm.get('password')?.value;
+      let confirmPassword = control.value;
+
+      if (password !== confirmPassword) {
+        return { passwordsDontMatch: true };
+      } else {
+        return null;
+      }
+    };
+  }
 
   constructor(
     private authService: AuthService,
@@ -51,9 +48,13 @@ export class SignUpComponent implements OnInit {
     private fb: NonNullableFormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.signUpForm
+      .get('confirmPassword')
+      ?.setValidators(this.passwordsMatchValidator());
+    this.signUpForm.get('confirmPassword')?.updateValueAndValidity();
+  }
 
-  
   get email() {
     return this.signUpForm.get('email');
   }
@@ -77,5 +78,4 @@ export class SignUpComponent implements OnInit {
     }
     this.authService.signUp(email, password, name);
   }
-
 }

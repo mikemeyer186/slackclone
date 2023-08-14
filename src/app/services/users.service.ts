@@ -19,14 +19,10 @@ import {
 } from '@angular/fire/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-  
 export class UsersService {
-  constructor(
-    private firestore: Firestore,
-    private auth: Auth
-  ) {
+  constructor(private firestore: Firestore, private auth: Auth) {
     this.getCurrentUserId();
   }
   ngOnInit() {
@@ -44,12 +40,12 @@ export class UsersService {
   currentUserName$: any;
   currentUserData$: any;
   currentUserPhoto: any;
-  currentUsers: any;  
-  currentUserRef = collection(this.firestore, GLOBAL_VARS.USERS, );
-  
-/**
-* Observes the users collection in Firestore and updates the local users array
- */
+  currentUsers: any;
+  currentUserRef = collection(this.firestore, GLOBAL_VARS.USERS);
+
+  /**
+   * Observes the users collection in Firestore and updates the local users array
+   */
   keepUsersUptodate() {
     const users$ = collectionData(this.usersCollection, { idField: 'uid' });
     users$.subscribe((_users) => {
@@ -62,39 +58,40 @@ export class UsersService {
    * Observes the current user data in Firestore
    * @returns Observable of the current user data
    */
-  observCurrentUser (): Observable<any[]> {
-      const q = query(this.usersCollection);
-  
-      return new Observable<any[]>((observer) => {
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-          const user = [];
-          querySnapshot.forEach((doc) => {
-            user.push(doc.data());
-          });
-          observer.next((this.currentUserData$ = user));
+  observCurrentUser(): Observable<any[]> {
+    const q = query(this.usersCollection);
+
+    return new Observable<any[]>((observer) => {
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const user = [];
+        querySnapshot.forEach((doc) => {
+          user.push(doc.data());
         });
-  
-        //Cleanup function to unsubscribe when the Observable is unsubscribed
-        return () => {
-          unsubscribe();
-        };
+        observer.next((this.currentUserData$ = user));
       });
-    }
-  
-/**
- * @returns all users from the users collection in Firestore
- */
+
+      //Cleanup function to unsubscribe when the Observable is unsubscribed
+      return () => {
+        unsubscribe();
+      };
+    });
+  }
+
+  /**
+   * @returns all users from the users collection in Firestore
+   */
   getAllUsers(): User[] {
     return this.currentUsers;
   }
-  
-  
+
   /**
    * @returns current user id
    */
   getCurrentUserId(): string {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
+        console.log(user);
+
         this.currentUserId$ = user.uid;
         this.currentUserName$ = user.displayName;
         this.currentUserPhoto = user.photoURL;
@@ -102,16 +99,18 @@ export class UsersService {
         this.currentUserId$ = null;
       }
     });
-    return this.currentUserId$
+    return this.currentUserId$;
   }
 
-
-/**
- * Retrieves the current user data from Firestore and returns it as a Promise
- * @returns Promise of the current user data
- */
+  /**
+   * Retrieves the current user data from Firestore and returns it as a Promise
+   * @returns Promise of the current user data
+   */
   async getCurrentUserData(): Promise<any> {
-    const docRef: DocumentReference<DocumentData> = doc(this.usersCollection, this.currentUserId$);
+    const docRef: DocumentReference<DocumentData> = doc(
+      this.usersCollection,
+      this.currentUserId$
+    );
     const docSnap: DocumentSnapshot<DocumentData> = await getDoc(docRef);
     if (docSnap.exists()) {
       this.currentUserData$ = docSnap.data();
@@ -121,27 +120,29 @@ export class UsersService {
       return null;
     }
   }
-  
-/**
- * retrieves the user data from Firestore by the user id
- * @param userId 
- * @returns Observable 
- */
+
+  /**
+   * retrieves the user data from Firestore by the user id
+   * @param userId
+   * @returns Observable
+   */
   getUserById$(userId: string): Observable<User> {
     const usersDocRef: DocumentReference = doc(this.usersCollection, userId);
     return docData(usersDocRef, { idField: 'UserId' }) as Observable<User>;
   }
-  
+
   /**
    * is used in the dialog-edit-user.component.ts
    * @param field indicates the field that was changed
    * @param arg represents the new value of the field
    */
-  async updateUserFieldValue(field:string,arg:any) {
-    const docRef:DocumentReference<DocumentData> = doc(this.usersCollection, this.currentUserId$);
+  async updateUserFieldValue(field: string, arg: any) {
+    const docRef: DocumentReference<DocumentData> = doc(
+      this.usersCollection,
+      this.currentUserId$
+    );
     await updateDoc(docRef, {
       [field]: arg,
     });
   }
-  
 }

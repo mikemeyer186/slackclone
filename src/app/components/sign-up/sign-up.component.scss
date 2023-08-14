@@ -12,6 +12,11 @@
     justify-content: flex-start;
   }
 
+  mat-error {
+    font-size: 12px;
+    transform: translateY(-3px);
+  }
+
   .logo {
     margin: 0 auto;
     margin-bottom: 32px;

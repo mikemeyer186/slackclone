@@ -23,25 +23,23 @@
 
             <mat-form-field>
                 <input matInput type="password" placeholder="Password" formControlName="password" />
-                <mat-error *ngIf="password.errors?.['required']">
+                <mat-error *ngIf="signUpForm.get('password').errors?.['required']">
                     Password is required
                 </mat-error>
-                <mat-error *ngIf="password.errors?.['minlength']">
+                <mat-error *ngIf="signUpForm.get('password').errors?.['minlength']">
                     Minimum 6 characters
                 </mat-error>
 
             </mat-form-field>
             <mat-form-field>
                 <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
-                <mat-error *ngIf="confirmPassword.errors?.['required']">
+                <mat-error *ngIf="signUpForm.get('confirmPassword').errors?.['required']">
                     Confirm Password is required
                 </mat-error>
+                <mat-error *ngIf="signUpForm.get('confirmPassword').errors?.['passwordsDontMatch']">
+                    Passwords should match
+                </mat-error>
             </mat-form-field>
-
-            <!-- Since the cross-validation of passwordsDontMatch relates to the whole form group, the error check has to be placed outside the mat-form-field -->
-            <mat-error *ngIf="signUpForm.errors?.['passwordsDontMatch']">
-                Passwords should match
-            </mat-error>
 
             <br>
 
