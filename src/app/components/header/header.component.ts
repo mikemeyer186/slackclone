@@ -33,8 +33,6 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     this.startSearchEvent();
-    console.log(this.currentUserName$);
-
     this.usersService.getCurrentUserId();
   }
 

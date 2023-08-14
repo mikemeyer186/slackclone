@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import * as GLOBAL_VARS from 'src/app/shared/globals';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 
@@ -21,10 +21,11 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UsersService implements OnInit {
   constructor(private firestore: Firestore, private auth: Auth) {
     this.getCurrentUserId();
   }
+
   ngOnInit() {
     this.keepUsersUptodate();
     this.observCurrentUser().subscribe((data) => {
@@ -90,10 +91,10 @@ export class UsersService {
   getCurrentUserId(): string {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        console.log(user);
-
         this.currentUserId$ = user.uid;
-        this.currentUserName$ = user.displayName;
+        this.getCurrentUserData().then((data) => {
+          this.currentUserName$ = data.displayName;
+        });
         this.currentUserPhoto = user.photoURL;
       } else {
         this.currentUserId$ = null;
