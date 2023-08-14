@@ -66,6 +66,7 @@ export class AuthService {
       this.toast.info(`Hi ${name}. Your were successfully signed up`);
       this.isUserLoggedIn = true;
       this.router.navigate(['/home']);
+      this.updateAuthdisplayName(name);
     } catch (err) {
       this.toast.error(err.message);
     }
@@ -79,7 +80,7 @@ export class AuthService {
    * @param password
    * @returns
    */
-  signIn = async (email: string, password: string) => {
+  async signIn(email: string, password: string) {
     const userCredentials = await signInWithEmailAndPassword(
       this.auth,
       email,
@@ -100,7 +101,7 @@ export class AuthService {
       });
 
     return userCredentials;
-  };
+  }
 
   /**
    * Regular expression for email validation

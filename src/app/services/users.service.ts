@@ -92,9 +92,7 @@ export class UsersService implements OnInit {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.currentUserId$ = user.uid;
-        this.getCurrentUserData().then((data) => {
-          this.currentUserName$ = data.displayName;
-        });
+        this.currentUserName$ = user.displayName;
         this.currentUserPhoto = user.photoURL;
       } else {
         this.currentUserId$ = null;
