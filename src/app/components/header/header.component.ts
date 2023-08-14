@@ -25,7 +25,11 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     public searchService: SearchService,
     public globalService: GlobalService
-  ) {}
+  ) {
+    this.globalService.profileChanged.subscribe((value) => {
+      this.usersService.getCurrentUserId();
+    });
+  }
 
   async ngOnInit() {
     this.startSearchEvent();

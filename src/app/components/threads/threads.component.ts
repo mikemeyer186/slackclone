@@ -25,7 +25,16 @@ export class ThreadsComponent implements OnInit {
     public usersService: UsersService,
     public channelService: ChannelService,
     public globalService: GlobalService
-  ) {}
+  ) {
+    this.globalService.profileChanged.subscribe(async (value) => {
+      await this.getAllThreads();
+      await this.getCurrentUserData();
+      this.getCurrentUserId();
+      this.getThreadsFromCurrentUser();
+      this.getAllUser();
+      this.channelService.updateThread();
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     await this.getAllThreads();

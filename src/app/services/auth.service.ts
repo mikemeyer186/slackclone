@@ -191,13 +191,9 @@ export class AuthService {
     const auth = getAuth();
     updateProfile(auth.currentUser, {
       displayName: dName,
-    })
-      .then(() => {
-        console.log(auth.currentUser);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   /**
@@ -205,17 +201,12 @@ export class AuthService {
    * @param photoName
    */
   updateAuthPhoto(photoName) {
-    console.log('update ProfilePhoto');
     const auth = getAuth();
     updateProfile(auth.currentUser, {
       photoURL: photoName,
-    })
-      .then(() => {
-        console.log(auth.currentUser);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   /**

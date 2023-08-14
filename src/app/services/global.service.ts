@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -11,13 +11,14 @@ export class GlobalService {
   threadsRightSideOpened: boolean = false; // handles if threads is right sided of channels
   usersShortcutOpened: boolean = false; // handles if usershortcut is open
   threadsShortcutOpened: boolean = false; // handles if threadsshortcut is open
-  private isSidebarOpenSubject = new Subject<boolean>(); 
+  private isSidebarOpenSubject = new Subject<boolean>();
   isSidebarOpen$ = this.isSidebarOpenSubject.asObservable(); // handles if sidebar is open
   private isSidebarOpen = true;
   public menuIcon = 'menu_open';
+  profileChanged: EventEmitter<Boolean> = new EventEmitter(); // handles if profile is changed
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    const customMinBreakpoint = '(min-width: 769px)'; // Breite ab der die Sidebar immer sichtbar sein soll
+    const customMinBreakpoint = '(min-width: 769px)'; // width display for sidebar is always open
 
     this.breakpointObserver
       .observe([customMinBreakpoint])
@@ -32,7 +33,6 @@ export class GlobalService {
 
   /**
    * toggles sidebar from open to close and otherwise
-   * 
    */
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -108,7 +108,7 @@ export class GlobalService {
 
   /**
    * resets all Components to false
-   * 
+   *
    */
   setAllComponentsFalse() {
     this.chatOpened = false;

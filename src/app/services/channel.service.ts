@@ -43,7 +43,13 @@ export class ChannelService {
     public globalService: GlobalService,
     public userService: UsersService,
     public chatService: ChatService
-  ) {}
+  ) {
+    this.globalService.profileChanged.subscribe(async (value) => {
+      await this.updateUserList();
+      this.changeUserInChannelThreads();
+      this.loadChannelContent();
+    });
+  }
 
   /**
    * open the channel-info dialog
@@ -65,6 +71,15 @@ export class ChannelService {
   }
 
   /**
+   * update the users list from firestore.service
+   */
+  async updateUserList() {
+    await this.firestoreService.getAllUsers().then(() => {
+      this.userList = this.firestoreService.usersList;
+    });
+  }
+
+  /**
    * load the channel content from firestore.service
    */
   async loadChannelContent(channelID?: string) {
@@ -73,9 +88,7 @@ export class ChannelService {
     await this.firestoreService.readChannels().then(() => {
       this.channelList = this.firestoreService.channelList;
     });
-    await this.firestoreService.getAllUsers().then(() => {
-      this.userList = this.firestoreService.usersList;
-    });
+    await this.updateUserList();
     this.findChannel(channelID);
     this.setUserInChannelInfo();
     this.findThreads(channelID);
@@ -183,6 +196,26 @@ export class ChannelService {
         if (thread.replies.length > 0) {
           thread.replies.forEach((reply: any) => {
             if (reply.user == user.id) {
+              this.setUserDataInThreads(reply, user);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  /**
+   * change user data in channelThreads
+   */
+  changeUserInChannelThreads() {
+    this.channelThreads.forEach((thread: any) => {
+      this.userList.forEach((user: any) => {
+        if (thread.user.id == user.id) {
+          this.setUserDataInThreads(thread, user);
+        }
+        if (thread.replies.length > 0) {
+          thread.replies.forEach((reply: any) => {
+            if (reply.user.id == user.id) {
               this.setUserDataInThreads(reply, user);
             }
           });

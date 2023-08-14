@@ -13,6 +13,7 @@ import {
   uploadBytes,
   getStorage,
 } from '@angular/fire/storage';
+import { GlobalService } from 'src/app/services/global.service';
 
 export interface DialogData {
   displayName;
@@ -48,7 +49,8 @@ export class DialogEditUserComponent {
     public usersService: UsersService,
     public firestoreService: FirestoreService,
     public authService: AuthService,
-    private toast: HotToastService
+    private toast: HotToastService,
+    public globalService: GlobalService
   ) {}
 
   currentUserData$: UserTemplate;
@@ -94,6 +96,10 @@ export class DialogEditUserComponent {
     this.firestoreService.observeChat$.subscribe((data) => {
       this.chat = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.globalService.profileChanged.emit(true);
   }
 
   /**

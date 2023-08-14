@@ -46,7 +46,7 @@
 
   .field-value {
     line-height: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: flex-start;
     @media (max-width: $breakpointCompact) {
@@ -57,6 +57,7 @@
   .field-value-form {
     line-height: 16px;
     background-color: tan;
+    outline: none;
   }
 
   .table-grid {

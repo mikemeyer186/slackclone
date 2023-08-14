@@ -100,8 +100,6 @@ export class CommentfieldComponent implements OnInit {
   setEditorHeight() {
     setTimeout(() => {
       let boxHeight: number = document.getElementById('box').clientHeight;
-      console.log(boxHeight);
-
       if (this.parentName === 'channel' || this.parentName === 'chat') {
         this.channelService.editorHeight = boxHeight + 'px';
         this.chatService.editorHeight = boxHeight + 'px';

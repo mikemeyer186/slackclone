@@ -26,7 +26,15 @@ export class ChatService {
     public firestoreService: FirestoreService,
     public userService: UsersService,
     public globalService: GlobalService
-  ) {}
+  ) {
+    this.globalService.profileChanged.subscribe(async (value) => {
+      if (this.chatReady) {
+        await this.updateUserList();
+        this.changeUserInChatHistory();
+        this.loadChatContent();
+      }
+    });
+  }
 
   /**
    * open the chat component and load the chat content
@@ -85,14 +93,21 @@ export class ChatService {
   }
 
   /**
+   * update the users lsit from firestore.service
+   */
+  async updateUserList() {
+    await this.firestoreService.getAllUsers().then(() => {
+      this.userList = this.firestoreService.usersList;
+    });
+  }
+
+  /**
    * load the chat content from firestore.service
    * @param chatPartner - the user to open a chat with
    */
   async loadChatContent() {
     this.chatReady = false;
-    await this.firestoreService.getAllUsers().then(() => {
-      this.userList = this.firestoreService.usersList;
-    });
+    await this.updateUserList();
     this.setChatHistory();
     this.findDates();
     this.setUserInChatHistory();
@@ -153,6 +168,21 @@ export class ChatService {
       this.chatHistory.forEach((chat: any) => {
         this.userList.forEach((user: any) => {
           if (chat.user === user.id) {
+            this.setUserDataInChat(chat, user);
+          }
+        });
+      });
+    }
+  }
+
+  /**
+   * change the user data in the chat history
+   */
+  changeUserInChatHistory() {
+    if (this.chatHistory.length > 0) {
+      this.chatHistory.forEach((chat: any) => {
+        this.userList.forEach((user: any) => {
+          if (chat.user.id === user.id) {
             this.setUserDataInChat(chat, user);
           }
         });
