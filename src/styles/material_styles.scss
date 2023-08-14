@@ -18,13 +18,16 @@ mat-toolbar-row {
   border-radius: 8px !important;
 }
 
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: $grey !important;
+  box-shadow: none !important;
+}
+
 .dialog-panel
   .mat-mdc-dialog-container
   .mdc-dialog__container
   .mat-mdc-dialog-surface {
   background-color: $grey;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px;
 
   .mdc-dialog__title::before {
     display: inline-block;
@@ -64,6 +67,8 @@ mat-toolbar-row {
     align-items: center;
     padding: 24px;
     background-color: $darkgrey;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
     mat-icon {
       position: absolute;

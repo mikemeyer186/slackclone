@@ -16,6 +16,8 @@
   width: clamp(200px, 1200px, 100%);
   position: relative;
   border-top: $thinBorder;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 
   @media (max-width: $breakpointCompact) {
     display: flex;
