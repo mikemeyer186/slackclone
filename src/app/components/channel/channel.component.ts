@@ -71,6 +71,11 @@ export class ChannelComponent implements OnInit, OnDestroy {
    */
   setEditorStatus() {
     this.showEditor = !this.showEditor;
+    if (!this.showEditor) {
+      this.channelService.editorHeight = '10px';
+    } else {
+      this.channelService.editorHeight = '124px';
+    }
     setTimeout(() => {
       this.scrollToBottomOfContent('smooth');
     }, 100);
@@ -82,6 +87,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
   checkWindowHeight() {
     if (window.innerHeight < 600) {
       this.showEditor = false;
+      this.channelService.editorHeight = '10px';
     } else {
       this.showEditor = true;
     }
@@ -94,6 +100,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
     window.addEventListener('resize', () => {
       if (window.innerHeight < 600) {
         this.showEditor = false;
+        this.channelService.editorHeight = '10px';
       } else {
         this.showEditor = true;
       }

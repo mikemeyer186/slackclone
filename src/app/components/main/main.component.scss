@@ -32,7 +32,7 @@
       top: 0;
       left: $sidebarWidth;
       right: 0;
-      height: 100%;
+      height: calc(100svh - $menuHeight);
       width: calc(100% - $sidebarWidth);
       z-index: 1;
     }
@@ -44,18 +44,20 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 100%;
+      height: calc(100svh - $menuHeight);
       width: 100%;
       z-index: 1;
     }
 
-    app-channel, app-chat,
-    app-users-shortcut, app-threads-shortcut {
+    app-channel,
+    app-chat,
+    app-users-shortcut,
+    app-threads-shortcut {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 100%;
+      height: calc(100svh - $menuHeight);
       width: 100%;
     }
   }

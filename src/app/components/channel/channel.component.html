@@ -1,7 +1,7 @@
 <div *ngIf="this.channelService.channelReady" class="channel-container">
     <div class="channelTitle">
         <div>
-            <mat-icon>numbers</mat-icon>
+            <mat-icon class="channel-icon">numbers</mat-icon>
             <span (click)="this.channelService.channelDialogOpen()">{{
                 this.channelService.activeChannel.title }}</span>
         </div>

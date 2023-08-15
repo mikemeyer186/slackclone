@@ -30,8 +30,9 @@
     background-color: $darkgrey;
     z-index: 1;
 
-    mat-icon {
+    .channel-icon {
       transform: translateY(6px);
+      cursor: inherit;
     }
 
     span {

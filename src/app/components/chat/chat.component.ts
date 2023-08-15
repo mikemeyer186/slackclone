@@ -60,6 +60,11 @@ export class ChatComponent implements OnDestroy, OnInit {
    */
   setEditorStatus() {
     this.showEditor = !this.showEditor;
+    if (!this.showEditor) {
+      this.chatService.editorHeight = '10px';
+    } else {
+      this.chatService.editorHeight = '124px';
+    }
     setTimeout(() => {
       this.scrollToBottomOfContent('smooth');
     }, 100);
@@ -71,6 +76,7 @@ export class ChatComponent implements OnDestroy, OnInit {
   checkWindowHeight() {
     if (window.innerHeight < 600) {
       this.showEditor = false;
+      this.chatService.editorHeight = '10px';
     } else {
       this.showEditor = true;
     }
@@ -83,6 +89,7 @@ export class ChatComponent implements OnDestroy, OnInit {
     window.addEventListener('resize', () => {
       if (window.innerHeight < 600) {
         this.showEditor = false;
+        this.chatService.editorHeight = '10px';
       } else {
         this.showEditor = true;
       }

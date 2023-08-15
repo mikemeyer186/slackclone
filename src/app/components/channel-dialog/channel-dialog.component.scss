@@ -11,7 +11,7 @@
     width: 100%;
   }
 
-  mat-icon {
+  .close-icon {
     cursor: pointer;
     color: $textgrey;
     position: absolute;
@@ -28,9 +28,19 @@
     background-color: $darkgrey;
     border-bottom: 1px solid rgba($textgrey, 0.2);
     padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
     h1 {
       margin: 0;
+    }
+
+    .channel-icon {
+      transform: translateY(2px);
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
     }
   }
 
