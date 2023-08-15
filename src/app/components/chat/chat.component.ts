@@ -76,7 +76,6 @@ export class ChatComponent implements OnDestroy, OnInit {
   checkWindowHeight() {
     if (window.innerHeight < 600) {
       this.showEditor = false;
-      this.chatService.editorHeight = '10px';
     } else {
       this.showEditor = true;
     }
@@ -92,6 +91,7 @@ export class ChatComponent implements OnDestroy, OnInit {
         this.chatService.editorHeight = '10px';
       } else {
         this.showEditor = true;
+        this.chatService.editorHeight = '124px';
       }
     });
   }

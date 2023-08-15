@@ -87,7 +87,6 @@ export class ChannelComponent implements OnInit, OnDestroy {
   checkWindowHeight() {
     if (window.innerHeight < 600) {
       this.showEditor = false;
-      this.channelService.editorHeight = '10px';
     } else {
       this.showEditor = true;
     }
@@ -103,6 +102,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
         this.channelService.editorHeight = '10px';
       } else {
         this.showEditor = true;
+        this.channelService.editorHeight = '124px';
       }
     });
   }
