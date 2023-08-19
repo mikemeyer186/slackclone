@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   gap: 64px;
-  height: 100vh;
+  height: 100svh;
 
   @media (max-width: $breakpointExpanded) {
     flex-direction: column;

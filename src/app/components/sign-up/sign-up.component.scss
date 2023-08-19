@@ -5,9 +5,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100svh;
 
-  @media (max-width: 900px) and (orientation: landscape) {
+  @media (max-width: 900px) or (max-height: 770px) {
     padding: 16px;
     justify-content: flex-start;
   }
@@ -34,6 +34,10 @@
       width: 100%;
     }
 
+    @media (max-height: 770px) {
+      padding: 24px 48px;
+    }
+
     @media (max-width: $breakpointCompact) {
       padding: 24px;
     }
@@ -54,6 +58,7 @@
     align-items: center;
     gap: 24px;
     margin-top: 32px;
+    padding-bottom: 32px;
 
     span {
       font-size: $small;

@@ -5,9 +5,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100svh;
 
-  @media (max-width: 900px) or (max-height: 700px) {
+  @media (max-width: 900px) or (max-height: 770px) {
     padding: 16px;
     justify-content: flex-start;
   }
@@ -32,6 +32,10 @@
 
     mat-form-field {
       width: 100%;
+    }
+
+    @media (max-height: 770px) {
+      padding: 24px 48px;
     }
 
     @media (max-width: $breakpointCompact) {
