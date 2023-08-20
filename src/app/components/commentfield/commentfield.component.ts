@@ -54,7 +54,7 @@ export class CommentfieldComponent implements OnInit {
         container: [
           ['bold', 'italic', 'underline'], // toggled buttons
           ['blockquote', 'code-block'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ list: 'ordered' } /*{ list: 'bullet' }*/],
           ['image'], // image
           ['emoji'],
         ],

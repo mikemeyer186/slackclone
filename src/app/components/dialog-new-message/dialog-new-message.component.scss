@@ -8,6 +8,10 @@
   background-color: $darkgrey;
   border-radius: 8px;
 
+  @media (max-width: $breakpointCompact) {
+    width: 100%;
+  }
+
   .message-container-top {
     border-bottom: 1px solid rgba($textgrey, 0.2);
     padding: 32px;
@@ -41,6 +45,7 @@
       color: $textgrey;
       font-size: $small;
       margin-bottom: 16px;
+      line-break: anywhere;
     }
 
     .profil-time-box {

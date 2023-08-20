@@ -31,6 +31,10 @@
 
     h1 {
       margin: 0;
+
+      @media (max-width: $breakpointCompact) {
+        font-size: $fonttitle;
+      }
     }
   }
 
@@ -54,6 +58,12 @@
       form {
         width: 100%;
         padding: 0px 28px;
+
+        @media (max-width: $breakpointCompact) {
+          mat-form-field {
+            width: 100%;
+          }
+        }
       }
 
       mat-error {

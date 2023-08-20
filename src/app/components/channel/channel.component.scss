@@ -286,6 +286,10 @@
       font-weight: 300;
       color: $textgrey;
       margin-left: 3px;
+
+      @media (max-width: 350px) {
+        display: none;
+      }
     }
 
     .posting-thread-navigate {

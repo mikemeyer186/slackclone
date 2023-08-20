@@ -31,6 +31,10 @@
 
     h1 {
       margin: 0;
+
+      @media (max-width: $breakpointCompact) {
+        font-size: $fonttitle;
+      }
     }
   }
 

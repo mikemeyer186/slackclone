@@ -53,7 +53,7 @@ mat-toolbar-row {
     color: $white;
 
     @media (max-width: $breakpointCompact) {
-      font-size: $small !important;
+      font-size: $fonttitle;
     }
   }
 
@@ -65,6 +65,7 @@ mat-toolbar-row {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     padding: 24px;
     background-color: $darkgrey;
     border-top-left-radius: 8px;
@@ -74,12 +75,6 @@ mat-toolbar-row {
       position: absolute;
       top: 16px;
       right: 16px;
-    }
-
-    @media (max-width: $breakpointCompact) {
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: column-reverse;
     }
   }
 
