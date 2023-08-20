@@ -10,17 +10,14 @@ mat-toolbar-row {
 }
 
 .mdc-dialog__title + .mdc-dialog__content {
-  padding: 16px !important;
-}
-
-.mdc-dialog__container {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px !important;
+  padding: 16px;
 }
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: $grey !important;
   box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
 }
 
 .dialog-panel
@@ -89,4 +86,14 @@ mat-toolbar-row {
 mat-card {
   padding: 16px;
   width: 50%;
+}
+
+.input-field-reset {
+  .mat-mdc-text-field-wrapper,
+  .mdc-text-field--outlined {
+    background-color: transparent;
+    border: $normalBorder !important;
+    border-radius: 8px !important;
+    overflow: auto;
+  }
 }

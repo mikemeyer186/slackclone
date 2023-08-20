@@ -60,7 +60,10 @@ export class SignInComponent {
    */
   openDialog($event) {
     $event.preventDefault();
-    const dialogRef = this.dialog.open(DialogResetPasswordComponent, {});
+    const dialogRef = this.dialog.open(DialogResetPasswordComponent, {
+      maxWidth: '100vw',
+      autoFocus: false,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
