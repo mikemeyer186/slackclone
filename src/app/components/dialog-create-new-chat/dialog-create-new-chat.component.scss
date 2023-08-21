@@ -45,6 +45,7 @@
     border-bottom-right-radius: 8px;
 
     .dialog-main-box {
+      position: relative;
       border: 1px solid rgba($textgrey, 0.2);
       border-radius: 8px;
       overflow: hidden;
@@ -68,6 +69,9 @@
 
       mat-error {
         padding: 0px 28px;
+        font-size: $small;
+        position: absolute;
+        top: 120px;
       }
 
       .dialog-description {

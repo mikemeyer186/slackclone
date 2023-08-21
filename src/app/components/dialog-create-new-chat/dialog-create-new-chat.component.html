@@ -22,6 +22,7 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </form>
+            <mat-error *ngIf="this.isButtonDisabled && this.inputTouched">No matching user found</mat-error>
             <p class="dialog-description">Search for people and invite them to a conversation.</p>
             <div mat-dialog-actions class="btn-container">
                 <button form="dm-form" mat-button [disabled]="isButtonDisabled" class="btn">Create</button>
