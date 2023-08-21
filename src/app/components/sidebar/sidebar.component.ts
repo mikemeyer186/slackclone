@@ -46,8 +46,8 @@ export class SidebarComponent implements OnInit {
     public createChannelDialog: MatDialog,
     public globalService: GlobalService,
     public searchService: SearchService,
-    private breakpointObserver: BreakpointObserver,
-  ) { }
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   async ngOnInit() {
     this.breakPointObserving();
@@ -61,17 +61,17 @@ export class SidebarComponent implements OnInit {
 
   /**
    * when the breakpoint for responive sidebar is reached it toogles the sidebar to close, else it stays open
-   * 
+   *
    */
   checkSidebarClosing() {
-    if(this.responsiveSidebar) {
+    if (this.responsiveSidebar) {
       this.toggleSidebar();
     }
   }
 
   /**
    * toggles the droppdown menu for channels and directmessages in the sidebar
-   * 
+   *
    */
   toggleDropdown(key) {
     switch (key) {
@@ -90,7 +90,7 @@ export class SidebarComponent implements OnInit {
 
   /**
    * opens the dialog to create a new channel
-   * 
+   *
    */
   openCreateChannelDialog() {
     this.createChannelDialog.open(DialogCreateNewChannelComponent, {
@@ -100,17 +100,18 @@ export class SidebarComponent implements OnInit {
 
   /**
    * opens the dialog to create a new chat
-   * 
+   *
    */
   openCreateChatDialog() {
     this.createChannelDialog.open(DialogCreateNewChatComponent, {
       maxWidth: '100vw',
+      autoFocus: false,
     });
   }
 
   /**
    * renders the channel componend based on the channel id
-   * 
+   *
    */
   async renderChannel(channel) {
     this.resetAllActiveStates();
@@ -121,7 +122,7 @@ export class SidebarComponent implements OnInit {
 
   /**
    * renders the chat componend based on the chatPartner id
-   * 
+   *
    */
   async renderChat(chatPartner) {
     this.resetAllActiveStates();
@@ -133,7 +134,7 @@ export class SidebarComponent implements OnInit {
 
   /**
    * renders the users shortcut componend
-   * 
+   *
    */
   renderUsers() {
     this.resetAllActiveStates();
@@ -144,7 +145,7 @@ export class SidebarComponent implements OnInit {
 
   /**
    * renders the thread shortcut componend
-   * 
+   *
    */
   renderThreadShortcuts() {
     this.resetAllActiveStates();
@@ -181,25 +182,25 @@ export class SidebarComponent implements OnInit {
 
   /**
    * toggles the sidebar
-   * 
+   *
    */
   toggleSidebar() {
     this.globalService.toggleSidebar();
   }
 
-
   /**
    * Handels when the sidebar is displayed on the side or is overlaping or filling fullscreen
-   * 
+   *
    */
   breakPointObserving() {
     const customMaxBreakpoint = '(max-width: 768px)'; // Breite bis zu der Sidebar mode over ausgeführt wird
 
-    this.breakpointObserver.observe([customMaxBreakpoint])
+    this.breakpointObserver
+      .observe([customMaxBreakpoint])
       .subscribe((state: BreakpointState) => {
         this.drawerMode = state.matches ? 'over' : 'side';
         this.responsiveSidebar = state.matches ? true : false;
-        if(!this.globalService.isSidebarOpen$) {
+        if (!this.globalService.isSidebarOpen$) {
           this.toggleSidebar();
         }
       });
@@ -207,21 +208,21 @@ export class SidebarComponent implements OnInit {
 
   /**
    * Subscribs to the channels from the channellist at the firestore service and activates the default.
-   * 
+   *
    */
   getChannelsFromFirestore() {
     this.firestoreService.getChannelList().subscribe((channels) => {
       this.channels = channels;
-      this.channels.forEach( channel => {
-        if(channel.title == this.channelService.defaultChannelId)
+      this.channels.forEach((channel) => {
+        if (channel.title == this.channelService.defaultChannelId)
           channel.isActive = true;
-      })
+      });
     });
   }
 
   /**
    * Filters and subscribs to the chats from the chatlist at the firestore service
-   * 
+   *
    */
   getChatsFromFirestore() {
     this.firestoreService.getChatList().subscribe((chats) => {
@@ -261,20 +262,17 @@ export class SidebarComponent implements OnInit {
             this.chatPartners.push(userData); // userData added to chatPartners Array
           });
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     });
   }
 
   /**
    * Sets all states of shortcuts, channels and chatPartners to false.
-   * 
+   *
    */
   resetAllActiveStates(): void {
-    this.shortcuts.forEach(item => item.isActive = false);
-    this.channels.forEach(channel => channel.isActive = false);
-    this.chatPartners.forEach(chatPartner => chatPartner.isActive = false);
+    this.shortcuts.forEach((item) => (item.isActive = false));
+    this.channels.forEach((channel) => (channel.isActive = false));
+    this.chatPartners.forEach((chatPartner) => (chatPartner.isActive = false));
   }
-
-
 }

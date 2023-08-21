@@ -11,9 +11,9 @@
             <!-- Dialog Form Section -->
             <form (ngSubmit)="onSubmit()" [formGroup]="dmForm" id="dm-form">
                 <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input type="text" placeholder="Pick one" aria-label="Name" matInput formControlName="displayName"
-                        [matAutocomplete]="auto" required (input)="filterUsers()" />
+                    <mat-label>User</mat-label>
+                    <input type="text" aria-label="Name" matInput formControlName="displayName" [matAutocomplete]="auto"
+                        required (input)="filterUsers()" />
                     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option (click)="selectUser(user)" *ngFor="let user of filteredUsers"
                             [value]="user.displayName">
@@ -22,7 +22,6 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </form>
-            <mat-error *ngIf="isButtonDisabled">No matching user found.</mat-error>
             <p class="dialog-description">Search for people and invite them to a conversation.</p>
             <div mat-dialog-actions class="btn-container">
                 <button form="dm-form" mat-button [disabled]="isButtonDisabled" class="btn">Create</button>
