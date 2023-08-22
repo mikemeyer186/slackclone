@@ -6,7 +6,7 @@
         <h1 class="text-center">Log-in</h1>
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <mat-form-field>
-                <input matInput placeholder="Email address" formControlName="email">
+                <input matInput placeholder="Email" formControlName="email">
                 <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
                 <mat-error *ngIf="email?.errors?.['email']">Wrong email format!</mat-error>
             </mat-form-field>
@@ -25,8 +25,8 @@
                     password?</button>
             </div>
             <div class="center margin-top16">
-                <button type="button" (click)="guestSignIn()" mat-stroked-button class="signIn-button">Sign-in as Guest
-                    User</button>
+                <button type="button" (click)="guestSignIn()" mat-stroked-button class="signIn-button">Sign-in as
+                    guest user</button>
             </div>
             <div class="center margin-top16">
                 <button type="button" (click)="signInWithGoogle ()" mat-stroked-button class="signIn-button"> <img
