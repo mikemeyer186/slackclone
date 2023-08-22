@@ -18,18 +18,21 @@
             <div class="center margin-top16">
                 <button mat-raised-button color="primary" type="submit">Login</button>
             </div>
-            <span class="center margin-top16">New to our platform? <a class="sign-up-link"
+            <span class="center margin-top16 newText">New to our platform? <a class="sign-up-link"
                     routerLink="/sign-up">Sign-up!</a></span>
             <div class="center">
                 <button mat-button type="text" class="center margin-top16" (click)="openDialog($event)">Reset your
                     password?</button>
             </div>
             <div class="center margin-top16">
-                <button type="button" (click)="guestSignIn()" mat-stroked-button>Sign-in as Guest User</button>
+                <button type="button" (click)="guestSignIn()" mat-stroked-button class="signIn-button">Sign-in as Guest
+                    User</button>
             </div>
             <div class="center margin-top16">
-                <button type="button" (click)="signInWithGoogle ()" mat-stroked-button> <img class="googlelogo"
-                        src="assets/img/google-icon.png" alt="">Sign-in with Google</button>
+                <button type="button" (click)="signInWithGoogle ()" mat-stroked-button class="signIn-button"> <img
+                        class="googlelogo" src="assets/img/google-icon.png" alt=""><span
+                        class="signIn-google-text">Sign-in with
+                        Google</span></button>
             </div>
 
         </form>
