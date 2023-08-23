@@ -144,7 +144,7 @@ export class AuthService {
         providerUser = this.onSuccess(result);
       },
       (error) => {
-        this.toast.error(error.message);
+        //this.toast.error(error.message);
       }
     );
 
